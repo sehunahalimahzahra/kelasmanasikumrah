@@ -79,6 +79,36 @@
         .animate-float { animation: float 6s ease-in-out infinite; }
         .animate-float-delayed { animation: float-delay 7s ease-in-out infinite; animation-delay: 2s; }
 
+        /* Marquee Text Testimoni Animation */
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-scroll {
+            display: flex;
+            width: max-content;
+            animation: scroll 35s linear infinite;
+        }
+        .animate-scroll:hover {
+            animation-play-state: paused;
+        }
+        
+        @keyframes scroll-y {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+        .animate-scroll-y {
+            display: flex;
+            flex-direction: column;
+            animation: scroll-y 35s linear infinite;
+        }
+        .animate-scroll-y:hover {
+            animation-play-state: paused;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0B2559; }
@@ -250,7 +280,7 @@
                             <!-- ISI GAMBAR DISINI: FOTO UTAMA NARASUMBER   -->
                             <!-- Ukuran wajib: 1080x1350                    -->
                             <!-- ========================================== -->
-                            <img src="assets/image2.png" alt="Ust. Asep Nurhidayat" class="w-full h-full object-cover">
+                            <img src="https://placehold.co/1080x1350/153657/D4AF37?font=inter&text=ISI+GAMBAR+DISINI+(FOTO+UST+ASEP+1080x1350)" alt="Ust. Asep Nurhidayat" class="w-full h-full object-cover">
                         </div>
                         
                         <!-- Ikon Media Sosial Saja -->
@@ -353,54 +383,165 @@
                 <p class="text-slate-500">Dengarkan langsung pengalaman berkesan mereka yang telah mengikuti bimbingan Manasik Umrah.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                <!-- Testimoni 1 (Portrait 1080x1920) -->
-                <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-800 shadow-card hover:shadow-2xl transition-shadow group">
-                    <!-- ========================================== -->
-                    <!-- ISI GAMBAR DISINI: VIDEO TESTIMONI 1       -->
-                    <!-- ========================================== -->
-                    <video class="w-full h-full object-cover" controls
-                           poster="https://placehold.co/1080x1920/0F172A/ffffff?font=inter&text=ISI+GAMBAR+DISINI+(THUMBNAIL+TESTI+1)">
-                        <!-- <source src="video_testimoni_1.mp4" type="video/mp4"> -->
-                    </video>
-                    <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent text-white pointer-events-none">
-                        <p class="font-bold text-sm">Bpk. H. Abdullah</p>
-                        <p class="text-xs text-slate-300">Pengusaha</p>
+            <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center lg:items-stretch">
+                
+                <!-- Testimoni Video (Kiri) -->
+                <div class="w-full lg:w-5/12 shrink-0">
+                    <div class="relative rounded-[2rem] overflow-hidden aspect-[4/5] bg-slate-800 shadow-card hover:shadow-2xl transition-all duration-300 group cursor-pointer w-full max-w-md mx-auto" onclick="openVideoModal('video1')">
+                        <!-- ========================================== -->
+                        <!-- ISI GAMBAR DISINI: THUMBNAIL TESTIMONI     -->
+                        <!-- ========================================== -->
+                        <img src="https://placehold.co/1080x1350/0F172A/ffffff?font=inter&text=ISI+GAMBAR+DISINI+(THUMBNAIL+TESTIMONI)" alt="Thumbnail Testimoni" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        
+                        <!-- Play Button Overlay -->
+                        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+                            <div class="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/40 group-hover:scale-110 transition-transform shadow-glow-gold">
+                                <i class="fas fa-play text-3xl text-white ml-2"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/90 via-black/50 to-transparent text-white">
+                            <p class="font-bold text-xl mb-1">Bpk. H. Abdullah</p>
+                            <p class="text-sm text-brand-goldLight font-medium">Pengusaha</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Testimoni 2 (Portrait 1080x1920) -->
-                <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-800 shadow-card hover:shadow-2xl transition-shadow group">
-                    <!-- ========================================== -->
-                    <!-- ISI GAMBAR DISINI: VIDEO TESTIMONI 2       -->
-                    <!-- ========================================== -->
-                    <video class="w-full h-full object-cover" controls
-                           poster="https://placehold.co/1080x1920/0F172A/ffffff?font=inter&text=ISI+GAMBAR+DISINI+(THUMBNAIL+TESTI+2)">
-                        <!-- <source src="video_testimoni_2.mp4" type="video/mp4"> -->
-                    </video>
-                    <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent text-white pointer-events-none">
-                        <p class="font-bold text-sm">Ibu Hj. Aisyah</p>
-                        <p class="text-xs text-slate-300">Ibu Rumah Tangga</p>
+                <!-- Testimoni Teks Berjalan Vertikal (Kanan) -->
+                <div class="w-full lg:w-7/12 relative h-[550px] lg:h-[650px] overflow-hidden rounded-[2rem] bg-slate-50 border border-slate-100 p-4 lg:p-6 shadow-inner flex flex-col justify-start">
+                    <!-- Efek Blur/Gradien di Atas dan Bawah -->
+                    <div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-slate-50 to-transparent z-10 pointer-events-none rounded-t-[2rem]"></div>
+                    <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-slate-50 to-transparent z-10 pointer-events-none rounded-b-[2rem]"></div>
+                    
+                    <div class="animate-scroll-y gap-6 flex-col">
+                        
+                        <!-- SET 1 (4 Testimoni) -->
+                        <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col hover:-translate-y-1 transition-transform cursor-default">
+                            <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
+                            <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Penyampaian materinya sangat mudah dipahami. Alhamdulillah, persiapan umrah pertama saya menjadi lebih tenang dan mantap berkat bimbingan beliau."</p>
+                            <div class="flex items-center gap-3 mt-auto">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 text-brand-accent flex items-center justify-center font-bold text-sm">H</div>
+                                <div>
+                                    <p class="font-bold text-brand-900 text-sm">Hamba Allah</p>
+                                    <p class="text-xs text-slate-500">Pegawai Swasta</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col hover:-translate-y-1 transition-transform cursor-default">
+                            <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
+                            <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Luar biasa! Pendekatan beliau tentang 'Filosofi Haji' benar-benar mengubah sudut pandang saya. Ibadah jadi terasa lebih bermakna dan mendalam."</p>
+                            <div class="flex items-center gap-3 mt-auto">
+                                <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-sm">S</div>
+                                <div>
+                                    <p class="font-bold text-brand-900 text-sm">Bpk. Supriyadi</p>
+                                    <p class="text-xs text-slate-500">Wiraswasta</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col hover:-translate-y-1 transition-transform cursor-default">
+                            <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
+                            <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Sangat direkomendasikan! Penjelasan fiqih manasiknya sangat detail namun praktis untuk diaplikasikan. Terima kasih Ust. Asep atas ilmunya."</p>
+                            <div class="flex items-center gap-3 mt-auto">
+                                <div class="w-10 h-10 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center font-bold text-sm">A</div>
+                                <div>
+                                    <p class="font-bold text-brand-900 text-sm">Ibu Siti Aminah</p>
+                                    <p class="text-xs text-slate-500">Ibu Rumah Tangga</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-brand-900 text-white border border-brand-800 p-6 md:p-8 rounded-[1.5rem] shadow-md flex flex-col hover:-translate-y-1 transition-transform cursor-default relative overflow-hidden">
+                            <div class="absolute inset-0 bg-mesh opacity-10"></div>
+                            <div class="text-brand-goldLight text-2xl mb-4 opacity-80 relative z-10"><i class="fas fa-quote-left"></i></div>
+                            <p class="text-slate-300 text-sm leading-relaxed italic mb-6 relative z-10">"Tidak hanya teori, tapi pemantapan tauhidnya sangat menyentuh hati. Kami sekeluarga siap berangkat ke Baitullah dengan niat yang lurus."</p>
+                            <div class="flex items-center gap-3 mt-auto relative z-10">
+                                <div class="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center font-bold text-sm backdrop-blur-sm">R</div>
+                                <div>
+                                    <p class="font-bold text-white text-sm">Keluarga Bpk. Rahmat</p>
+                                    <p class="text-xs text-slate-400">PNS</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SET 2 (DUPLIKAT AGAR SCROLL MULUS) -->
+                        <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col hover:-translate-y-1 transition-transform cursor-default">
+                            <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
+                            <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Penyampaian materinya sangat mudah dipahami. Alhamdulillah, persiapan umrah pertama saya menjadi lebih tenang dan mantap berkat bimbingan beliau."</p>
+                            <div class="flex items-center gap-3 mt-auto">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 text-brand-accent flex items-center justify-center font-bold text-sm">H</div>
+                                <div>
+                                    <p class="font-bold text-brand-900 text-sm">Hamba Allah</p>
+                                    <p class="text-xs text-slate-500">Pegawai Swasta</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col hover:-translate-y-1 transition-transform cursor-default">
+                            <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
+                            <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Luar biasa! Pendekatan beliau tentang 'Filosofi Haji' benar-benar mengubah sudut pandang saya. Ibadah jadi terasa lebih bermakna dan mendalam."</p>
+                            <div class="flex items-center gap-3 mt-auto">
+                                <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-sm">S</div>
+                                <div>
+                                    <p class="font-bold text-brand-900 text-sm">Bpk. Supriyadi</p>
+                                    <p class="text-xs text-slate-500">Wiraswasta</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col hover:-translate-y-1 transition-transform cursor-default">
+                            <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
+                            <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Sangat direkomendasikan! Penjelasan fiqih manasiknya sangat detail namun praktis untuk diaplikasikan. Terima kasih Ust. Asep atas ilmunya."</p>
+                            <div class="flex items-center gap-3 mt-auto">
+                                <div class="w-10 h-10 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center font-bold text-sm">A</div>
+                                <div>
+                                    <p class="font-bold text-brand-900 text-sm">Ibu Siti Aminah</p>
+                                    <p class="text-xs text-slate-500">Ibu Rumah Tangga</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-brand-900 text-white border border-brand-800 p-6 md:p-8 rounded-[1.5rem] shadow-md flex flex-col hover:-translate-y-1 transition-transform cursor-default relative overflow-hidden">
+                            <div class="absolute inset-0 bg-mesh opacity-10"></div>
+                            <div class="text-brand-goldLight text-2xl mb-4 opacity-80 relative z-10"><i class="fas fa-quote-left"></i></div>
+                            <p class="text-slate-300 text-sm leading-relaxed italic mb-6 relative z-10">"Tidak hanya teori, tapi pemantapan tauhidnya sangat menyentuh hati. Kami sekeluarga siap berangkat ke Baitullah dengan niat yang lurus."</p>
+                            <div class="flex items-center gap-3 mt-auto relative z-10">
+                                <div class="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center font-bold text-sm backdrop-blur-sm">R</div>
+                                <div>
+                                    <p class="font-bold text-white text-sm">Keluarga Bpk. Rahmat</p>
+                                    <p class="text-xs text-slate-400">PNS</p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- Testimoni 3 (Portrait 1080x1920) -->
-                <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-800 shadow-card hover:shadow-2xl transition-shadow group">
-                    <!-- ========================================== -->
-                    <!-- ISI GAMBAR DISINI: VIDEO TESTIMONI 3       -->
-                    <!-- ========================================== -->
-                    <video class="w-full h-full object-cover" controls
-                           poster="https://placehold.co/1080x1920/0F172A/ffffff?font=inter&text=ISI+GAMBAR+DISINI+(THUMBNAIL+TESTI+3)">
-                        <!-- <source src="video_testimoni_3.mp4" type="video/mp4"> -->
-                    </video>
-                    <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent text-white pointer-events-none">
-                        <p class="font-bold text-sm">Keluarga Bpk. Rahman</p>
-                        <p class="text-xs text-slate-300">Jamaah Keluarga</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
+
+    <!-- Modal Pop-up Video Testimoni -->
+    <div id="video-modal" class="fixed inset-0 z-[150] hidden items-center justify-center bg-black/90 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <!-- Tombol Close (Luar Video) -->
+        <button onclick="closeVideoModal()" class="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-colors border border-white/20 z-[160]">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+
+        <div class="relative w-full max-w-sm max-h-[90vh] mx-4 rounded-3xl overflow-hidden shadow-2xl border border-white/10 transform scale-95 transition-transform duration-300" id="video-modal-content">
+            <!-- Container Video Portrait (9:16) -->
+            <div class="relative aspect-[9/16] bg-black">
+                <!-- ========================================== -->
+                <!-- ISI VIDEO DISINI (Didalam Modal)           -->
+                <!-- ========================================== -->
+                <!-- Video 1 -->
+                <video id="video-player-1" class="w-full h-full object-cover hidden" controls playsinline>
+                    <!-- <source src="assets/video_testimoni.mp4" type="video/mp4"> -->
+                </video>
+            </div>
+        </div>
+    </div>
 
     <section class="py-24 bg-slate-50 relative border-t border-slate-200" id="paket">
         
@@ -502,7 +643,7 @@
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <i class="fas fa-check text-green-500 mt-1 shrink-0"></i>
-                                    <span class="font-semibold text-brand-900">Grup tanya jawab mengenai ibadah haji dan umrah</span>
+                                    <span class="font-semibold text-brand-900">Masuk grup aktif seputar ibadah haji dan umrah</span>
                                 </div>
                             </div>
                         </div>
@@ -736,6 +877,16 @@
                 <h3 class="text-xl md:text-2xl font-serif text-brand-goldLight mb-6 italic max-w-2xl px-4">
                     "Sebaik-baik bekal adalah takwa. Persiapkan perjalanan sucimu dengan ilmu agar meraih mabrur yang hakiki."
                 </h3>
+                
+                <p class="text-brand-accent font-bold text-lg mb-2">
+                    Promo Early Bird berlaku s.d 15 Agustus 2026
+                </p>
+                
+                <p class="text-slate-400 mb-6 flex items-center justify-center gap-2">
+                    <i class="far fa-envelope"></i> sagharasemestatc@gmail.com
+                </p>
+
+            </div>
             
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-center items-center text-xs text-slate-500">
                 <p>&copy; 2026 Saghara Semesta. Hak Cipta Dilindungi.</p>
@@ -906,6 +1057,72 @@
             const waNumber = "6285210028919"; 
             window.open(`https://wa.me/${waNumber}?text=${encodedMessage}`, '_blank');
         }
+
+        // Fungsi untuk membuka Modal Video
+        function openVideoModal(videoId) {
+            const modal = document.getElementById('video-modal');
+            const modalContent = document.getElementById('video-modal-content');
+            
+            // Sembunyikan player terlebih dahulu
+            document.getElementById('video-player-1').classList.add('hidden');
+            
+            // Hentikan video yang mungkin sedang berjalan (Reset)
+            document.getElementById('video-player-1').pause();
+            
+            // Tampilkan player
+            let activePlayer = document.getElementById('video-player-1');
+            
+            if(activePlayer) {
+                activePlayer.classList.remove('hidden');
+            }
+
+            // Tampilkan Modal dengan animasi
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Sedikit delay agar transisi CSS bekerja
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.classList.add('opacity-100');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+            
+            // Otomatis mainkan video (jika browser mengizinkan)
+            if(activePlayer) {
+                activePlayer.play().catch(error => {
+                    console.log("Autoplay dicegah oleh browser, user harus menekan play manual.");
+                });
+            }
+        }
+
+        // Fungsi untuk menutup Modal Video
+        function closeVideoModal() {
+            const modal = document.getElementById('video-modal');
+            const modalContent = document.getElementById('video-modal-content');
+            
+            // Animasi menghilang
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            
+            // Hentikan video saat modal ditutup
+            document.getElementById('video-player-1').pause();
+            
+            // Sembunyikan modal setelah animasi selesai
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+
+        // Tutup modal jika klik di luar area video
+        document.getElementById('video-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVideoModal();
+            }
+        });
     </script>
 </body>
 </html>
