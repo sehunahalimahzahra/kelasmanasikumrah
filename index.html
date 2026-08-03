@@ -120,45 +120,45 @@
 
     <nav class="fixed w-full z-50 transition-all duration-300 py-4" id="navbar">
         <div class="container mx-auto px-4 md:px-8">
-            <div class="glass-panel rounded-full px-6 py-3 flex justify-between items-center border border-white/10 shadow-lg bg-brand-900/40 hover:bg-brand-900/60 transition-colors">
+            <div class="rounded-full px-6 py-3 flex justify-between items-center border border-white/50 shadow-lg bg-white/40 backdrop-blur-md hover:bg-white/60 transition-all duration-300">
                 <!-- Logo -->
                 <a href="#" class="flex items-center gap-2 group">
                     <!-- ========================================== -->
                     <!-- ISI GAMBAR DISINI: LOGO NAVBAR UTAMA       -->
                     <!-- ========================================== -->
-                    <img src="assets/logossputih.png" alt="Logo Saghara Semesta" class="h-8 md:h-10 object-contain">
+                    <img src="assets/logoss.png" alt="Logo Saghara Semesta" class="h-8 md:h-10 object-contain">
                 </a>
                 
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-6 items-center text-sm font-medium">
-                    <a href="#profil" class="text-slate-300 hover:text-white transition">Narasumber</a>
-                    <a href="#materi" class="text-slate-300 hover:text-white transition">Materi</a>
-                    <a href="#testimoni" class="text-slate-300 hover:text-white transition">Testimoni</a>
-                    <a href="#paket" class="text-slate-300 hover:text-white transition">Pilihan Kelas</a>
-                    <a href="#faq" class="text-slate-300 hover:text-white transition">FAQ</a>
+                <div class="hidden md:flex space-x-6 items-center text-sm font-bold">
+                    <a href="#profil" class="text-brand-900 hover:text-brand-accent transition">Narasumber</a>
+                    <a href="#materi" class="text-brand-900 hover:text-brand-accent transition">Materi</a>
+                    <a href="#testimoni" class="text-brand-900 hover:text-brand-accent transition">Testimoni</a>
+                    <a href="#paket" class="text-brand-900 hover:text-brand-accent transition">Pilihan Kelas</a>
+                    <a href="#faq" class="text-brand-900 hover:text-brand-accent transition">FAQ</a>
                 </div>
 
                 <!-- CTA & Mobile Toggle -->
                 <div class="flex items-center gap-4">
-                    <button onclick="document.getElementById('pendaftaran').scrollIntoView({behavior: 'smooth'})" class="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-semibold text-brand-900 bg-brand-gold hover:bg-brand-goldLight rounded-full transition-all shadow-glow-gold hover:-translate-y-0.5">
+                    <button onclick="document.getElementById('pendaftaran').scrollIntoView({behavior: 'smooth'})" class="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-bold text-brand-900 bg-brand-gold hover:bg-brand-goldLight rounded-full transition-all shadow-glow-gold hover:-translate-y-0.5">
                         Daftar Sekarang
                     </button>
-                    <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
+                    <button id="mobile-menu-btn" class="md:hidden text-brand-900 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
         
         <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden absolute top-20 left-4 right-4 glass-panel rounded-2xl border border-white/10 shadow-2xl overflow-hidden backdrop-blur-xl bg-brand-900/95">
-            <div class="px-4 py-4 space-y-2 flex flex-col text-sm">
-                <a href="#profil" class="block px-4 py-3 text-slate-200 hover:bg-white/5 rounded-lg transition">Narasumber</a>
-                <a href="#materi" class="block px-4 py-3 text-slate-200 hover:bg-white/5 rounded-lg transition">Materi</a>
-                <a href="#testimoni" class="block px-4 py-3 text-slate-200 hover:bg-white/5 rounded-lg transition">Testimoni</a>
-                <a href="#paket" class="block px-4 py-3 text-slate-200 hover:bg-white/5 rounded-lg transition">Pilihan Kelas</a>
-                <a href="#faq" class="block px-4 py-3 text-slate-200 hover:bg-white/5 rounded-lg transition">FAQ</a>
-                <button onclick="document.getElementById('pendaftaran').scrollIntoView({behavior: 'smooth'})" class="block w-full px-4 py-3 mt-2 text-center bg-brand-gold text-brand-900 font-bold rounded-lg">Daftar Sekarang</button>
+        <div id="mobile-menu" class="hidden absolute top-20 left-4 right-4 rounded-2xl border border-white/50 shadow-2xl overflow-hidden backdrop-blur-xl bg-white/95">
+            <div class="px-4 py-4 space-y-2 flex flex-col text-sm font-bold">
+                <a href="#profil" class="block px-4 py-3 text-brand-900 hover:bg-slate-100 rounded-lg transition">Narasumber</a>
+                <a href="#materi" class="block px-4 py-3 text-brand-900 hover:bg-slate-100 rounded-lg transition">Materi</a>
+                <a href="#testimoni" class="block px-4 py-3 text-brand-900 hover:bg-slate-100 rounded-lg transition">Testimoni</a>
+                <a href="#paket" class="block px-4 py-3 text-brand-900 hover:bg-slate-100 rounded-lg transition">Pilihan Kelas</a>
+                <a href="#faq" class="block px-4 py-3 text-brand-900 hover:bg-slate-100 rounded-lg transition">FAQ</a>
+                <button onclick="document.getElementById('pendaftaran').scrollIntoView({behavior: 'smooth'})" class="block w-full px-4 py-3 mt-2 text-center bg-brand-gold text-brand-900 rounded-lg">Daftar Sekarang</button>
             </div>
         </div>
     </nav>
@@ -280,7 +280,7 @@
                             <!-- ISI GAMBAR DISINI: FOTO UTAMA NARASUMBER   -->
                             <!-- Ukuran wajib: 1080x1350                    -->
                             <!-- ========================================== -->
-                            <img src="https://placehold.co/1080x1350/153657/D4AF37?font=inter&text=ISI+GAMBAR+DISINI+(FOTO+UST+ASEP+1080x1350)" alt="Ust. Asep Nurhidayat" class="w-full h-full object-cover">
+                            <img src="assets/image2.png" alt="Ust. Asep Nurhidayat" class="w-full h-full object-cover">
                         </div>
                         
                         <!-- Ikon Media Sosial Saja -->
@@ -871,7 +871,7 @@
                     <!-- ========================================== -->
                     <!-- ISI GAMBAR DISINI: LOGO FOOTER BAWAH       -->
                     <!-- ========================================== -->
-                    <img src="https://placehold.co/300x80/transparent/ffffff?font=inter&text=LOGO+Saghara+Semesta+DISINI" alt="Logo Saghara Semesta" class="h-12 object-contain grayscale brightness-200 opacity-80 hover:opacity-100 transition-opacity">
+                    <img src="assets/logossputih" alt="Logo Saghara Semesta" class="h-12 object-contain grayscale brightness-200 opacity-80 hover:opacity-100 transition-opacity">
                 </a>
                 
                 <h3 class="text-xl md:text-2xl font-serif text-brand-goldLight mb-6 italic max-w-2xl px-4">
@@ -914,11 +914,11 @@
             const navContainer = nav.querySelector('div > div');
             
             if (window.scrollY > 50) {
-                navContainer.classList.add('bg-brand-900/95', 'backdrop-blur-xl', 'border-white/10');
-                navContainer.classList.remove('bg-brand-900/40');
+                navContainer.classList.add('bg-white/95', 'backdrop-blur-xl', 'border-slate-200', 'shadow-md');
+                navContainer.classList.remove('bg-white/40', 'border-white/50', 'shadow-lg');
             } else {
-                navContainer.classList.add('bg-brand-900/40');
-                navContainer.classList.remove('bg-brand-900/95', 'backdrop-blur-xl', 'border-white/10');
+                navContainer.classList.add('bg-white/40', 'border-white/50', 'shadow-lg');
+                navContainer.classList.remove('bg-white/95', 'backdrop-blur-xl', 'border-slate-200', 'shadow-md');
             }
         });
 
