@@ -24,13 +24,13 @@
                     },
                     colors: {
                         brand: {
-                            900: '#0B2559', // Biru yang lebih terang/vibrant dari sebelumnya
+                            900: '#0B2559',
                             800: '#133B85', 
                             700: '#1D53B8',
-                            gold: '#D4AF37', // Classic gold
+                            gold: '#D4AF37',
                             goldLight: '#FCE69B',
                             goldDark: '#B49020',
-                            accent: '#4F8AEE' // Soft Blue / Terang
+                            accent: '#4F8AEE'
                         }
                     },
                     boxShadow: {
@@ -79,33 +79,6 @@
         .animate-float { animation: float 6s ease-in-out infinite; }
         .animate-float-delayed { animation: float-delay 7s ease-in-out infinite; animation-delay: 2s; }
 
-        /* Marquee Text Testimoni Animation */
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .animate-scroll {
-            display: flex;
-            width: max-content;
-            animation: scroll 35s linear infinite;
-        }
-        .animate-scroll:hover {
-            animation-play-state: paused;
-        }
-        
-        @keyframes scroll-y {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-50%); }
-        }
-        .animate-scroll-y {
-            display: flex;
-            flex-direction: column;
-            animation: scroll-y 35s linear infinite;
-        }
-        .animate-scroll-y:hover {
-            animation-play-state: paused;
-        }
-
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -114,6 +87,14 @@
         ::-webkit-scrollbar-track { background: #0B2559; }
         ::-webkit-scrollbar-thumb { background: #1D53B8; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+
+        /* Styling for manual scroll behavior on testimonials */
+        #testimonial-scroll-container {
+            /* Allow dragging visually without selecting text */
+            user-select: none; 
+            -webkit-user-select: none;
+            /* Menghilangkan scroll-snap agar animasi JS berjalan mulus */
+        }
     </style>
 </head>
 <body class="font-sans antialiased text-slate-800 selection:bg-brand-gold selection:text-brand-900">
@@ -123,10 +104,7 @@
             <div class="rounded-full px-6 py-3 flex justify-between items-center border border-white/50 shadow-lg bg-white/40 backdrop-blur-md hover:bg-white/60 transition-all duration-300">
                 <!-- Logo -->
                 <a href="#" class="flex items-center gap-2 group">
-                    <!-- ========================================== -->
-                    <!-- ISI GAMBAR DISINI: LOGO NAVBAR UTAMA       -->
-                    <!-- ========================================== -->
-                    <img src="assets/logoss.png" alt="Logo Saghara Semesta" class="h-8 md:h-10 object-contain">
+                    <img src="assets/logoss.png" onerror="this.src='https://placehold.co/150x40/transparent/0B2559?text=Logo+Saghara'" alt="Logo Saghara Semesta" class="h-8 md:h-10 object-contain">
                 </a>
                 
                 <!-- Desktop Menu -->
@@ -167,15 +145,12 @@
         <!-- Background Effects -->
         <div class="absolute inset-0 bg-radial-glow z-0"></div>
         <div class="absolute inset-0 bg-mesh opacity-20 z-0 mix-blend-screen"></div>
-        
-        <!-- Floating Blur Orbs -->
         <div class="absolute top-1/4 -left-32 w-96 h-96 bg-brand-accent/30 rounded-full blur-[100px] pointer-events-none"></div>
         <div class="absolute bottom-1/4 -right-32 w-96 h-96 bg-brand-gold/20 rounded-full blur-[100px] pointer-events-none"></div>
 
         <div class="container mx-auto px-4 relative z-10">
             <div class="max-w-4xl mx-auto text-center">
                 
-                <!-- Small badge -->
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-brand-gold/30 text-brand-goldLight text-xs font-semibold tracking-wider mb-6 hover:bg-brand-gold/10 transition-colors cursor-pointer">
                     <span class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
                     بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
@@ -190,10 +165,8 @@
                     Persiapkan perjalanan ibadah Umrah Anda secara spiritual, mental, dan fiqih bersama praktisi berpengalaman sebelum berangkat ke Baitullah.
                 </p>
 
-                <!-- Hero Interactive / Video Area -->
                 <div class="relative w-full max-w-4xl mx-auto mt-12 mb-8">
                     
-                    <!-- Left Floating Element -->
                     <div class="hidden lg:flex absolute top-10 -left-24 glass-panel rounded-2xl p-4 shadow-2xl border border-white/10 animate-float items-center gap-4 z-20 bg-brand-900/60 backdrop-blur-xl hover:scale-105 transition-transform cursor-pointer">
                         <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brand-gold to-brand-goldDark p-0.5">
                             <img src="https://placehold.co/100x100/1E293B/D4AF37?font=inter&text=Asep" alt="Ust. Asep" class="w-full h-full rounded-full border-2 border-brand-900 object-cover">
@@ -204,7 +177,6 @@
                         </div>
                     </div>
 
-                    <!-- Right Floating Element -->
                     <div class="hidden lg:flex absolute bottom-10 -right-20 glass-panel rounded-2xl p-4 shadow-2xl border border-white/10 animate-float-delayed items-center gap-3 z-20 bg-brand-900/60 backdrop-blur-xl hover:scale-105 transition-transform cursor-pointer">
                         <div class="w-10 h-10 rounded-xl bg-brand-accent/20 flex items-center justify-center text-brand-accent">
                             <i class="fas fa-gift"></i>
@@ -215,16 +187,14 @@
                         </div>
                     </div>
 
-                    <!-- Central Video Container (1920x1080) -->
+                    <!-- Video Container (Dengan Autoplay, Muted, Loop) -->
                     <div class="relative rounded-[2rem] p-2 bg-white/5 border border-white/10 shadow-glow-blue z-10 backdrop-blur-sm group hover:shadow-glow-gold transition-shadow duration-500">
                         <div class="absolute inset-0 bg-gradient-to-r from-brand-accent/20 via-transparent to-brand-gold/20 rounded-[2rem] opacity-0 group-hover:opacity-100 transition duration-700 pointer-events-none"></div>
                         
                         <div class="relative rounded-[1.5rem] overflow-hidden aspect-video bg-brand-800 flex items-center justify-center shadow-inner">
-                            <!-- ========================================== -->
-                            <!-- ISI GAMBAR DISINI: VIDEO PROMOSI 1920x1080 -->
-                            <!-- ========================================== -->
-                            <video class="w-full h-full object-cover" controls 
-                                   poster="https://placehold.co/1920x1080/0F172A/ffffff?font=inter&text=ISI+GAMBAR+DISINI+(THUMBNAIL+VIDEO+1920x1080)">
+                            <!-- Menambahkan atribut autoplay muted loop playsinline -->
+                            <video class="w-full h-full object-cover" controls autoplay muted loop playsinline 
+                                   poster="https://placehold.co/1920x1080/0F172A/ffffff?font=inter&text=THUMBNAIL+VIDEO">
                                 <!-- <source src="link_video_promosi_anda.mp4" type="video/mp4"> -->
                                 Browser Anda tidak mendukung video.
                             </video>
@@ -249,7 +219,6 @@
             </div>
         </div>
         
-        <!-- Bottom overlay fading into the next white section -->
         <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-slate-50 to-transparent z-10"></div>
     </header>
 
@@ -266,40 +235,31 @@
         <div class="container mx-auto px-4 md:px-6">
             <div class="flex flex-col gap-6 max-w-6xl mx-auto">
                 
-                <!-- Profil Narasumber Full Width Highlight Card -->
+                <!-- Profil Narasumber -->
                 <div class="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-card border border-slate-100 flex flex-col md:flex-row gap-12 items-center md:items-start group hover:shadow-2xl transition-all duration-500 relative overflow-hidden">
                     <div class="absolute -right-32 -top-32 w-96 h-96 bg-gradient-to-br from-brand-accent/5 to-brand-gold/10 rounded-full blur-3xl group-hover:bg-brand-accent/15 transition-colors duration-700 pointer-events-none"></div>
                     
-                    <!-- Image & Socials (Left) -->
                     <div class="shrink-0 flex flex-col items-center relative z-10 w-full md:w-auto">
                         <div class="absolute -left-2 -top-2 w-12 h-12 bg-brand-gold/30 rounded-full blur-md animate-pulse"></div>
                         
-                        <!-- Gambar besar 1080x1350 (Rasio 4:5) -->
                         <div class="relative w-72 md:w-80 aspect-[4/5] rounded-[2rem] border-4 border-white shadow-xl overflow-hidden mb-6 bg-slate-200 group-hover:-translate-y-2 group-hover:shadow-glow-blue transition-all duration-500 flex items-center justify-center text-center">
-                            <!-- ========================================== -->
-                            <!-- ISI GAMBAR DISINI: FOTO UTAMA NARASUMBER   -->
-                            <!-- Ukuran wajib: 1080x1350                    -->
-                            <!-- ========================================== -->
-                            <img src="assets/asep2.png" alt="Ust. Asep Nurhidayat" class="w-full h-full object-cover">
+                            <img src="assets/asep2.png" onerror="this.src='https://placehold.co/1080x1350/e2e8f0/0B2559?text=Foto+Narasumber'" alt="Ust. Asep Nurhidayat" class="w-full h-full object-cover">
                         </div>
                         
-                        <!-- Ikon Media Sosial Saja -->
                         <div class="flex gap-4 justify-center w-full">
-                            <a href="https://www.instagram.com/ustadz.asephidayat/" target="_blank" class="w-12 h-12 rounded-full bg-slate-50 text-slate-600 hover:text-pink-600 hover:bg-pink-100 flex items-center justify-center text-lg transition-all hover:scale-110 hover:-translate-y-1 shadow-sm"><i class="fab fa-instagram"></i></a>
-                            <a href="https://www.facebook.com/asepnurhidayat.abughazi" target="_blank" class="w-12 h-12 rounded-full bg-slate-50 text-slate-600 hover:text-blue-600 hover:bg-blue-100 flex items-center justify-center text-lg transition-all hover:scale-110 hover:-translate-y-1 shadow-sm"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://www.tiktok.com/@asep.hidayat191" target="_blank" class="w-12 h-12 rounded-full bg-slate-50 text-slate-600 hover:text-black hover:bg-gray-200 flex items-center justify-center text-lg transition-all hover:scale-110 hover:-translate-y-1 shadow-sm"><i class="fab fa-tiktok"></i></a>
-                            <a href="https://www.youtube.com/@asephidayatofficialchannel" target="_blank" class="w-12 h-12 rounded-full bg-slate-50 text-slate-600 hover:text-red-600 hover:bg-red-100 flex items-center justify-center text-lg transition-all hover:scale-110 hover:-translate-y-1 shadow-sm"><i class="fab fa-youtube"></i></a>
+                            <a href="#" target="_blank" class="w-12 h-12 rounded-full bg-slate-50 text-slate-600 hover:text-pink-600 hover:bg-pink-100 flex items-center justify-center text-lg transition-all hover:scale-110 hover:-translate-y-1 shadow-sm"><i class="fab fa-instagram"></i></a>
+                            <a href="#" target="_blank" class="w-12 h-12 rounded-full bg-slate-50 text-slate-600 hover:text-blue-600 hover:bg-blue-100 flex items-center justify-center text-lg transition-all hover:scale-110 hover:-translate-y-1 shadow-sm"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" target="_blank" class="w-12 h-12 rounded-full bg-slate-50 text-slate-600 hover:text-black hover:bg-gray-200 flex items-center justify-center text-lg transition-all hover:scale-110 hover:-translate-y-1 shadow-sm"><i class="fab fa-tiktok"></i></a>
+                            <a href="#" target="_blank" class="w-12 h-12 rounded-full bg-slate-50 text-slate-600 hover:text-red-600 hover:bg-red-100 flex items-center justify-center text-lg transition-all hover:scale-110 hover:-translate-y-1 shadow-sm"><i class="fab fa-youtube"></i></a>
                         </div>
                     </div>
                     
-                    <!-- Content (Right) -->
                     <div class="flex-1 text-center md:text-left relative z-10 w-full mt-4 md:mt-0">
                         <div class="inline-block bg-brand-gold/10 text-brand-goldDark px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4 border border-brand-gold/20">
                             Narasumber Utama
                         </div>
                         <h3 class="text-3xl md:text-5xl font-bold text-brand-900 mb-2">Ust. Asep Nurhidayat</h3>
                         
-                        <!-- Highlight Gelar -->
                         <div class="text-brand-accent font-bold mb-5 text-base md:text-lg flex items-center justify-center md:justify-start gap-2 bg-blue-50/50 inline-block px-4 py-2 rounded-xl">
                             <i class="fas fa-tv"></i> Da'i Siraman Qolbu MNC TV
                         </div>
@@ -308,7 +268,6 @@
                             <strong>Nurhidayat</strong> atau dikenal dengan <strong>Ust. Asep Nuridayat</strong> merupakan seorang Trainer profesional, Praktisi Haji dan Umrah, MC, Motivator, dan Narasumber di berbagai stasiun Radio (Reks FM, Female FM, Permana FM, MQ FM, Style FM) serta Televisi (MQ TV, MNC TV, Global TV, TVRI, Hidayah Chanel, iNews TV). Beliau telah menekuni dunia Trainer lebih dari 20 tahun, baik di tingkat Nasional maupun Internasional.
                         </p>
                         
-                        <!-- Badges Sertifikasi -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100 hover:border-brand-accent/50 hover:bg-blue-50 transition-all cursor-default group/badge hover:shadow-md">
                                 <div class="w-10 h-10 shrink-0 rounded-full bg-blue-100 text-brand-accent flex items-center justify-center group-hover/badge:scale-110 transition-transform"><i class="fas fa-certificate"></i></div>
@@ -330,9 +289,8 @@
                     </div>
                 </div>
 
-                <!-- Materi Grid (3 Columns Bento Style) -->
+                <!-- Materi Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-6" id="materi">
-                    <!-- Materi 1 -->
                     <div class="bg-white rounded-[2rem] p-6 md:p-8 shadow-card border border-slate-100 hover:border-brand-accent/30 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col group cursor-pointer">
                         <div class="w-12 h-12 rounded-2xl bg-blue-50 text-brand-accent flex items-center justify-center text-xl mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform">
                             <i class="fas fa-compass"></i>
@@ -343,7 +301,6 @@
                         </p>
                     </div>
 
-                    <!-- Materi 2 -->
                     <div class="bg-white rounded-[2rem] p-6 md:p-8 shadow-card border border-slate-100 hover:border-brand-gold/50 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col relative overflow-hidden group cursor-pointer">
                         <div class="absolute -right-4 -top-4 w-24 h-24 bg-brand-gold/5 rounded-full blur-xl group-hover:bg-brand-gold/20 transition-colors duration-500"></div>
                         <div class="w-12 h-12 rounded-2xl bg-amber-50 text-brand-goldDark flex items-center justify-center text-xl mb-6 relative z-10 group-hover:scale-110 group-hover:-rotate-3 transition-transform">
@@ -355,7 +312,6 @@
                         </p>
                     </div>
 
-                    <!-- Materi 3 -->
                     <div class="bg-brand-900 rounded-[2rem] p-6 md:p-8 shadow-card border border-brand-800 text-white relative overflow-hidden flex flex-col group hover:shadow-glow-blue hover:-translate-y-2 transition-all duration-300 cursor-pointer">
                         <div class="absolute inset-0 bg-mesh opacity-10"></div>
                         <div class="absolute right-0 top-0 w-full h-full bg-gradient-to-br from-brand-accent/20 to-transparent mix-blend-overlay opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -375,7 +331,6 @@
         </div>
     </main>
 
-    <!-- Testimoni Video Portrait Section -->
     <section class="py-20 bg-white relative border-t border-slate-200" id="testimoni">
         <div class="container mx-auto px-4 max-w-6xl">
             <div class="text-center mb-12">
@@ -385,15 +340,11 @@
 
             <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center lg:items-stretch">
                 
-                <!-- Testimoni Video (Kiri) -->
+                <!-- Testimoni Video -->
                 <div class="w-full lg:w-5/12 shrink-0">
                     <div class="relative rounded-[2rem] overflow-hidden aspect-[4/5] bg-slate-800 shadow-card hover:shadow-2xl transition-all duration-300 group cursor-pointer w-full max-w-md mx-auto" onclick="openVideoModal('video1')">
-                        <!-- ========================================== -->
-                        <!-- ISI GAMBAR DISINI: THUMBNAIL TESTIMONI     -->
-                        <!-- ========================================== -->
-                        <img src="https://placehold.co/1080x1350/0F172A/ffffff?font=inter&text=ISI+GAMBAR+DISINI+(THUMBNAIL+TESTIMONI)" alt="Thumbnail Testimoni" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <img src="https://placehold.co/1080x1350/0F172A/ffffff?font=inter&text=THUMBNAIL+TESTIMONI" alt="Thumbnail Testimoni" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                         
-                        <!-- Play Button Overlay -->
                         <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors flex items-center justify-center">
                             <div class="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/40 group-hover:scale-110 transition-transform shadow-glow-gold">
                                 <i class="fas fa-play text-3xl text-white ml-2"></i>
@@ -407,114 +358,118 @@
                     </div>
                 </div>
 
-                <!-- Testimoni Teks Berjalan Vertikal (Kanan) -->
-                <div class="w-full lg:w-7/12 relative h-[550px] lg:h-[650px] overflow-hidden rounded-[2rem] bg-slate-50 border border-slate-100 p-4 lg:p-6 shadow-inner flex flex-col justify-start">
-                    <!-- Efek Blur/Gradien di Atas dan Bawah -->
+                <!-- Testimoni Teks Berjalan (Auto scroll + Manual drag) -->
+                <div class="w-full lg:w-7/12 relative h-[550px] lg:h-[650px] rounded-[2rem] bg-slate-50 border border-slate-100 shadow-inner overflow-hidden">
+                    <!-- Efek Blur/Gradien -->
                     <div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-slate-50 to-transparent z-10 pointer-events-none rounded-t-[2rem]"></div>
                     <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-slate-50 to-transparent z-10 pointer-events-none rounded-b-[2rem]"></div>
                     
-                    <div class="animate-scroll-y gap-6 flex-col">
-                        
-                        <!-- SET 1 (4 Testimoni) -->
-                        <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col hover:-translate-y-1 transition-transform cursor-default">
-                            <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
-                            <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Penyampaian materinya sangat mudah dipahami. Alhamdulillah, persiapan umrah pertama saya menjadi lebih tenang dan mantap berkat bimbingan beliau."</p>
-                            <div class="flex items-center gap-3 mt-auto">
-                                <div class="w-10 h-10 rounded-full bg-blue-100 text-brand-accent flex items-center justify-center font-bold text-sm">H</div>
-                                <div>
-                                    <p class="font-bold text-brand-900 text-sm">Hamba Allah</p>
-                                    <p class="text-xs text-slate-500">Pegawai Swasta</p>
+                    <!-- Container Scrollable -->
+                    <!-- Menambahkan id untuk JS dan classes untuk overflow manual tanpa scrollbar visual -->
+                    <div id="testimonial-scroll-container" class="w-full h-full overflow-y-auto hide-scrollbar p-4 lg:p-6 cursor-grab active:cursor-grabbing">
+                        <div class="flex flex-col gap-6" id="testimonial-inner">
+                            
+                            <!-- SET 1 (4 Testimoni) -->
+                            <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col transition-transform cursor-default select-none">
+                                <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
+                                <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Penyampaian materinya sangat mudah dipahami. Alhamdulillah, persiapan umrah pertama saya menjadi lebih tenang dan mantap berkat bimbingan beliau."</p>
+                                <div class="flex items-center gap-3 mt-auto">
+                                    <div class="w-10 h-10 rounded-full bg-blue-100 text-brand-accent flex items-center justify-center font-bold text-sm">H</div>
+                                    <div>
+                                        <p class="font-bold text-brand-900 text-sm">Hamba Allah</p>
+                                        <p class="text-xs text-slate-500">Pegawai Swasta</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col hover:-translate-y-1 transition-transform cursor-default">
-                            <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
-                            <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Luar biasa! Pendekatan beliau tentang 'Filosofi Haji' benar-benar mengubah sudut pandang saya. Ibadah jadi terasa lebih bermakna dan mendalam."</p>
-                            <div class="flex items-center gap-3 mt-auto">
-                                <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-sm">S</div>
-                                <div>
-                                    <p class="font-bold text-brand-900 text-sm">Bpk. Supriyadi</p>
-                                    <p class="text-xs text-slate-500">Wiraswasta</p>
+                            <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col transition-transform cursor-default select-none">
+                                <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
+                                <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Luar biasa! Pendekatan beliau tentang 'Filosofi Haji' benar-benar mengubah sudut pandang saya. Ibadah jadi terasa lebih bermakna dan mendalam."</p>
+                                <div class="flex items-center gap-3 mt-auto">
+                                    <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-sm">S</div>
+                                    <div>
+                                        <p class="font-bold text-brand-900 text-sm">Bpk. Supriyadi</p>
+                                        <p class="text-xs text-slate-500">Wiraswasta</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col hover:-translate-y-1 transition-transform cursor-default">
-                            <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
-                            <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Sangat direkomendasikan! Penjelasan fiqih manasiknya sangat detail namun praktis untuk diaplikasikan. Terima kasih Ust. Asep atas ilmunya."</p>
-                            <div class="flex items-center gap-3 mt-auto">
-                                <div class="w-10 h-10 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center font-bold text-sm">A</div>
-                                <div>
-                                    <p class="font-bold text-brand-900 text-sm">Ibu Siti Aminah</p>
-                                    <p class="text-xs text-slate-500">Ibu Rumah Tangga</p>
+                            <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col transition-transform cursor-default select-none">
+                                <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
+                                <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Sangat direkomendasikan! Penjelasan fiqih manasiknya sangat detail namun praktis untuk diaplikasikan. Terima kasih Ust. Asep atas ilmunya."</p>
+                                <div class="flex items-center gap-3 mt-auto">
+                                    <div class="w-10 h-10 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center font-bold text-sm">A</div>
+                                    <div>
+                                        <p class="font-bold text-brand-900 text-sm">Ibu Siti Aminah</p>
+                                        <p class="text-xs text-slate-500">Ibu Rumah Tangga</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="bg-brand-900 text-white border border-brand-800 p-6 md:p-8 rounded-[1.5rem] shadow-md flex flex-col hover:-translate-y-1 transition-transform cursor-default relative overflow-hidden">
-                            <div class="absolute inset-0 bg-mesh opacity-10"></div>
-                            <div class="text-brand-goldLight text-2xl mb-4 opacity-80 relative z-10"><i class="fas fa-quote-left"></i></div>
-                            <p class="text-slate-300 text-sm leading-relaxed italic mb-6 relative z-10">"Tidak hanya teori, tapi pemantapan tauhidnya sangat menyentuh hati. Kami sekeluarga siap berangkat ke Baitullah dengan niat yang lurus."</p>
-                            <div class="flex items-center gap-3 mt-auto relative z-10">
-                                <div class="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center font-bold text-sm backdrop-blur-sm">R</div>
-                                <div>
-                                    <p class="font-bold text-white text-sm">Keluarga Bpk. Rahmat</p>
-                                    <p class="text-xs text-slate-400">PNS</p>
+                            <div class="bg-brand-900 text-white border border-brand-800 p-6 md:p-8 rounded-[1.5rem] shadow-md flex flex-col transition-transform cursor-default relative overflow-hidden select-none">
+                                <div class="absolute inset-0 bg-mesh opacity-10"></div>
+                                <div class="text-brand-goldLight text-2xl mb-4 opacity-80 relative z-10"><i class="fas fa-quote-left"></i></div>
+                                <p class="text-slate-300 text-sm leading-relaxed italic mb-6 relative z-10">"Tidak hanya teori, tapi pemantapan tauhidnya sangat menyentuh hati. Kami sekeluarga siap berangkat ke Baitullah dengan niat yang lurus."</p>
+                                <div class="flex items-center gap-3 mt-auto relative z-10">
+                                    <div class="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center font-bold text-sm backdrop-blur-sm">R</div>
+                                    <div>
+                                        <p class="font-bold text-white text-sm">Keluarga Bpk. Rahmat</p>
+                                        <p class="text-xs text-slate-400">PNS</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- SET 2 (DUPLIKAT AGAR SCROLL MULUS) -->
-                        <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col hover:-translate-y-1 transition-transform cursor-default">
-                            <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
-                            <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Penyampaian materinya sangat mudah dipahami. Alhamdulillah, persiapan umrah pertama saya menjadi lebih tenang dan mantap berkat bimbingan beliau."</p>
-                            <div class="flex items-center gap-3 mt-auto">
-                                <div class="w-10 h-10 rounded-full bg-blue-100 text-brand-accent flex items-center justify-center font-bold text-sm">H</div>
-                                <div>
-                                    <p class="font-bold text-brand-900 text-sm">Hamba Allah</p>
-                                    <p class="text-xs text-slate-500">Pegawai Swasta</p>
+                            <!-- SET 2 (DUPLIKAT AGAR SCROLL MULUS JS) -->
+                            <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col transition-transform cursor-default select-none">
+                                <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
+                                <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Penyampaian materinya sangat mudah dipahami. Alhamdulillah, persiapan umrah pertama saya menjadi lebih tenang dan mantap berkat bimbingan beliau."</p>
+                                <div class="flex items-center gap-3 mt-auto">
+                                    <div class="w-10 h-10 rounded-full bg-blue-100 text-brand-accent flex items-center justify-center font-bold text-sm">H</div>
+                                    <div>
+                                        <p class="font-bold text-brand-900 text-sm">Hamba Allah</p>
+                                        <p class="text-xs text-slate-500">Pegawai Swasta</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col hover:-translate-y-1 transition-transform cursor-default">
-                            <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
-                            <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Luar biasa! Pendekatan beliau tentang 'Filosofi Haji' benar-benar mengubah sudut pandang saya. Ibadah jadi terasa lebih bermakna dan mendalam."</p>
-                            <div class="flex items-center gap-3 mt-auto">
-                                <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-sm">S</div>
-                                <div>
-                                    <p class="font-bold text-brand-900 text-sm">Bpk. Supriyadi</p>
-                                    <p class="text-xs text-slate-500">Wiraswasta</p>
+                            <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col transition-transform cursor-default select-none">
+                                <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
+                                <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Luar biasa! Pendekatan beliau tentang 'Filosofi Haji' benar-benar mengubah sudut pandang saya. Ibadah jadi terasa lebih bermakna dan mendalam."</p>
+                                <div class="flex items-center gap-3 mt-auto">
+                                    <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-sm">S</div>
+                                    <div>
+                                        <p class="font-bold text-brand-900 text-sm">Bpk. Supriyadi</p>
+                                        <p class="text-xs text-slate-500">Wiraswasta</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col hover:-translate-y-1 transition-transform cursor-default">
-                            <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
-                            <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Sangat direkomendasikan! Penjelasan fiqih manasiknya sangat detail namun praktis untuk diaplikasikan. Terima kasih Ust. Asep atas ilmunya."</p>
-                            <div class="flex items-center gap-3 mt-auto">
-                                <div class="w-10 h-10 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center font-bold text-sm">A</div>
-                                <div>
-                                    <p class="font-bold text-brand-900 text-sm">Ibu Siti Aminah</p>
-                                    <p class="text-xs text-slate-500">Ibu Rumah Tangga</p>
+                            <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col transition-transform cursor-default select-none">
+                                <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
+                                <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Sangat direkomendasikan! Penjelasan fiqih manasiknya sangat detail namun praktis untuk diaplikasikan. Terima kasih Ust. Asep atas ilmunya."</p>
+                                <div class="flex items-center gap-3 mt-auto">
+                                    <div class="w-10 h-10 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center font-bold text-sm">A</div>
+                                    <div>
+                                        <p class="font-bold text-brand-900 text-sm">Ibu Siti Aminah</p>
+                                        <p class="text-xs text-slate-500">Ibu Rumah Tangga</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="bg-brand-900 text-white border border-brand-800 p-6 md:p-8 rounded-[1.5rem] shadow-md flex flex-col hover:-translate-y-1 transition-transform cursor-default relative overflow-hidden">
-                            <div class="absolute inset-0 bg-mesh opacity-10"></div>
-                            <div class="text-brand-goldLight text-2xl mb-4 opacity-80 relative z-10"><i class="fas fa-quote-left"></i></div>
-                            <p class="text-slate-300 text-sm leading-relaxed italic mb-6 relative z-10">"Tidak hanya teori, tapi pemantapan tauhidnya sangat menyentuh hati. Kami sekeluarga siap berangkat ke Baitullah dengan niat yang lurus."</p>
-                            <div class="flex items-center gap-3 mt-auto relative z-10">
-                                <div class="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center font-bold text-sm backdrop-blur-sm">R</div>
-                                <div>
-                                    <p class="font-bold text-white text-sm">Keluarga Bpk. Rahmat</p>
-                                    <p class="text-xs text-slate-400">PNS</p>
+                            <div class="bg-brand-900 text-white border border-brand-800 p-6 md:p-8 rounded-[1.5rem] shadow-md flex flex-col transition-transform cursor-default relative overflow-hidden select-none">
+                                <div class="absolute inset-0 bg-mesh opacity-10"></div>
+                                <div class="text-brand-goldLight text-2xl mb-4 opacity-80 relative z-10"><i class="fas fa-quote-left"></i></div>
+                                <p class="text-slate-300 text-sm leading-relaxed italic mb-6 relative z-10">"Tidak hanya teori, tapi pemantapan tauhidnya sangat menyentuh hati. Kami sekeluarga siap berangkat ke Baitullah dengan niat yang lurus."</p>
+                                <div class="flex items-center gap-3 mt-auto relative z-10">
+                                    <div class="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center font-bold text-sm backdrop-blur-sm">R</div>
+                                    <div>
+                                        <p class="font-bold text-white text-sm">Keluarga Bpk. Rahmat</p>
+                                        <p class="text-xs text-slate-400">PNS</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
 
@@ -524,18 +479,12 @@
 
     <!-- Modal Pop-up Video Testimoni -->
     <div id="video-modal" class="fixed inset-0 z-[150] hidden items-center justify-center bg-black/90 backdrop-blur-sm opacity-0 transition-opacity duration-300">
-        <!-- Tombol Close (Luar Video) -->
         <button onclick="closeVideoModal()" class="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-colors border border-white/20 z-[160]">
             <i class="fas fa-times text-xl"></i>
         </button>
 
         <div class="relative w-full max-w-sm max-h-[90vh] mx-4 rounded-3xl overflow-hidden shadow-2xl border border-white/10 transform scale-95 transition-transform duration-300" id="video-modal-content">
-            <!-- Container Video Portrait (9:16) -->
             <div class="relative aspect-[9/16] bg-black">
-                <!-- ========================================== -->
-                <!-- ISI VIDEO DISINI (Didalam Modal)           -->
-                <!-- ========================================== -->
-                <!-- Video 1 -->
                 <video id="video-player-1" class="w-full h-full object-cover hidden" controls playsinline>
                     <!-- <source src="assets/video_testimoni.mp4" type="video/mp4"> -->
                 </video>
@@ -545,16 +494,12 @@
 
     <section class="py-24 bg-slate-50 relative border-t border-slate-200" id="paket">
         
-        <!-- Bonus E-Book Banner -->
         <div class="container mx-auto px-4 mb-16">
             <div class="max-w-4xl mx-auto bg-gradient-to-r from-amber-100 via-amber-50 to-white border border-amber-200 rounded-[2rem] p-6 md:p-10 flex flex-col md:flex-row items-center gap-8 shadow-lg relative overflow-hidden hover:shadow-xl transition-shadow duration-300">
                 <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-brand-gold/10 rounded-full blur-3xl"></div>
                 
                 <div class="shrink-0 w-32 h-44 bg-slate-200 rounded-lg shadow-2xl border-4 border-white flex items-center justify-center text-center overflow-hidden transform -rotate-3 hover:rotate-0 transition-transform cursor-pointer">
-                     <!-- ========================================== -->
-                     <!-- ISI GAMBAR DISINI: COVER BUKU E-BOOK       -->
-                     <!-- ========================================== -->
-                     <img src="assets/bukuthe6.png" alt="Buku The 6 Ways to Success" class="w-full h-full object-cover">
+                     <img src="assets/bukuthe6.png" onerror="this.src='https://placehold.co/300x400/D4AF37/0B2559?text=Cover+Buku'" alt="Buku The 6 Ways to Success" class="w-full h-full object-cover">
                 </div>
 
                 <div class="flex-1 text-center md:text-left relative z-10">
@@ -575,41 +520,34 @@
                 <p class="text-slate-500 max-w-xl mx-auto">Tersedia kelas tatap muka eksklusif dan kelas daring. Pilih paket yang paling sesuai dengan kebutuhan Anda.</p>
             </div>
 
-            <!-- Card UI (Clean White / Bento Style) -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 
                 <!-- KELAS ONLINE CARD -->
                 <div class="bg-white rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden">
                     
-                    <!-- Gambar Poster Full Top (Rasio 4:5 / 1080x1350) -->
-                    <div class="relative w-full aspect-[4/5] bg-slate-100 overflow-hidden cursor-pointer">
-                        <!-- ========================================== -->
-                        <!-- ISI GAMBAR DISINI: POSTER KELAS ONLINE     -->
-                        <!-- ========================================== -->
-                        <img src="assets/flayer1.png" alt="Flyer Manasik Online" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+                    <!-- Menambahkan onclick untuk memanggil modal gambar -->
+                    <div class="relative w-full aspect-[4/5] bg-slate-100 overflow-hidden cursor-pointer" onclick="openImageModal(this.querySelector('img').src)">
+                        <img src="assets/flayer1.png" onerror="this.src='https://placehold.co/1080x1350/e2e8f0/0B2559?text=Poster+Kelas+Online'" alt="Flyer Manasik Online" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
                         <div class="absolute top-4 left-4 bg-brand-accent text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md uppercase tracking-wide">
                             Kelas Online
                         </div>
+                        <!-- Indikator bisa di klik -->
+                        <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-4xl shadow-sm"></i>
+                        </div>
                     </div>
                     
-                    <!-- Card Body (Clean & Minimalist) -->
                     <div class="p-6 md:p-8 flex flex-col flex-1 bg-white">
-                        
-                        <!-- Title & Price Zone -->
                         <div class="flex flex-col mb-4">
                             <h3 class="text-xl font-bold text-slate-800 leading-snug mb-2">Pelatihan Manasik Online</h3>
                             <div class="text-[#8B1E41] font-bold text-2xl">Rp 50.000</div>
                         </div>
 
-                        <!-- Toggle Detail Button -->
                         <button onclick="toggleOnlineDetails()" id="btn-toggle-online" class="w-full py-2.5 mb-5 text-sm font-semibold text-slate-600 bg-slate-50 border border-slate-200 rounded-xl hover:bg-slate-100 hover:text-brand-900 transition-colors flex items-center justify-center gap-2">
                             Detail Lebih Lanjut <i class="fas fa-chevron-down transition-transform" id="icon-toggle-online"></i>
                         </button>
 
-                        <!-- Hidden Detail Section -->
                         <div id="online-details" class="hidden text-sm text-slate-600 mb-6 bg-slate-50/50 p-5 rounded-2xl border border-slate-100 shadow-inner">
-                            
-                            <!-- Jadwal & Lokasi -->
                             <div class="mb-5 pb-5 border-b border-slate-200 space-y-3">
                                 <h4 class="font-bold text-brand-900 text-xs uppercase tracking-wider mb-3 flex items-center gap-2">
                                     <i class="fas fa-calendar-check text-brand-accent"></i> Jadwal & Lokasi
@@ -628,7 +566,6 @@
                                 </div>
                             </div>
 
-                            <!-- Include / Fasilitas -->
                             <div class="space-y-3">
                                 <h4 class="font-bold text-brand-900 text-xs uppercase tracking-wider mb-3 flex items-center gap-2">
                                     <i class="fas fa-box-open text-brand-accent"></i> Include Paket
@@ -648,7 +585,6 @@
                             </div>
                         </div>
 
-                        <!-- CTA Button -->
                         <button onclick="selectPackageAndScroll('Online')" class="mt-auto w-full block text-center py-4 rounded-xl border-2 border-brand-900 text-brand-900 font-bold hover:bg-brand-900 hover:text-white transition-all duration-300 shadow-sm">
                             Daftar Kelas Online
                         </button>
@@ -658,21 +594,19 @@
                 <!-- KELAS OFFLINE CARD -->
                 <div class="bg-white rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden">
                     
-                    <!-- Gambar Poster Full Top (Rasio 4:5 / 1080x1350) -->
-                    <div class="relative w-full aspect-[4/5] bg-slate-100 overflow-hidden cursor-pointer">
-                        <!-- ========================================== -->
-                        <!-- ISI GAMBAR DISINI: POSTER KELAS OFFLINE    -->
-                        <!-- ========================================== -->
-                        <img src="assets/flayer2.png" alt="Flyer Manasik Offline" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+                    <!-- Menambahkan onclick untuk memanggil modal gambar -->
+                    <div class="relative w-full aspect-[4/5] bg-slate-100 overflow-hidden cursor-pointer" onclick="openImageModal(this.querySelector('img').src)">
+                        <img src="assets/flayer2.png" onerror="this.src='https://placehold.co/1080x1350/e2e8f0/B49020?text=Poster+Kelas+Offline'" alt="Flyer Manasik Offline" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
                         <div class="absolute top-4 right-4 bg-brand-goldDark text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md uppercase tracking-wide">
                             Kelas Offline
                         </div>
+                        <!-- Indikator bisa di klik -->
+                        <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-4xl shadow-sm"></i>
+                        </div>
                     </div>
                     
-                    <!-- Card Body (Clean & Minimalist) -->
                     <div class="p-6 md:p-8 flex flex-col flex-1 bg-white">
-                        
-                        <!-- Title & Price Zone -->
                         <div class="flex flex-col mb-4">
                             <h3 class="text-xl font-bold text-slate-800 leading-snug mb-1">Pelatihan Manasik Offline</h3>
                             <p class="text-xs text-brand-goldDark font-semibold uppercase tracking-wide mb-2">Tatap Muka Eksklusif</p>
@@ -683,15 +617,11 @@
                             </div>
                         </div>
 
-                        <!-- Toggle Detail Button -->
                         <button onclick="toggleOfflineDetails()" id="btn-toggle-offline" class="w-full py-2.5 mb-5 text-sm font-semibold text-slate-600 bg-slate-50 border border-slate-200 rounded-xl hover:bg-slate-100 hover:text-brand-900 transition-colors flex items-center justify-center gap-2">
                             Detail Lebih Lanjut <i class="fas fa-chevron-down transition-transform" id="icon-toggle-offline"></i>
                         </button>
 
-                        <!-- Hidden Detail Section Offline -->
                         <div id="offline-details" class="hidden text-sm text-slate-600 mb-6 bg-amber-50/30 p-5 rounded-2xl border border-amber-100 shadow-inner">
-                            
-                            <!-- Jadwal & Lokasi -->
                             <div class="mb-5 pb-5 border-b border-amber-200/60 space-y-3">
                                 <h4 class="font-bold text-brand-900 text-xs uppercase tracking-wider mb-3 flex items-center gap-2">
                                     <i class="fas fa-calendar-check text-brand-goldDark"></i> Jadwal & Lokasi
@@ -710,7 +640,6 @@
                                 </div>
                             </div>
 
-                            <!-- Include / Fasilitas -->
                             <div class="space-y-3">
                                 <h4 class="font-bold text-brand-900 text-xs uppercase tracking-wider mb-3 flex items-center gap-2">
                                     <i class="fas fa-box-open text-brand-goldDark"></i> Include Paket
@@ -734,7 +663,6 @@
                             </div>
                         </div>
 
-                        <!-- CTA Button -->
                         <button onclick="selectPackageAndScroll('Offline')" class="mt-auto w-full block text-center py-4 rounded-xl bg-brand-900 text-white font-bold hover:bg-brand-800 hover:shadow-lg transition-all duration-300">
                             Daftar Kelas Offline
                         </button>
@@ -745,7 +673,17 @@
         </div>
     </section>
 
-    <!-- Formulir Pendaftaran Section -->
+    <!-- Modal Pop-up Gambar Poster -->
+    <div id="image-modal" class="fixed inset-0 z-[150] hidden items-center justify-center bg-black/95 backdrop-blur-md opacity-0 transition-opacity duration-300 cursor-zoom-out" onclick="closeImageModal()">
+        <button class="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/30 text-white rounded-full flex items-center justify-center transition-colors border border-white/20 z-[160]" onclick="closeImageModal()">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+        <!-- Kontainer gambar agar tidak overflow screen -->
+        <div class="relative max-w-[95vw] max-h-[95vh] p-4 flex items-center justify-center">
+            <img id="modal-image-src" src="" class="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl transform scale-95 transition-transform duration-300" onclick="event.stopPropagation();">
+        </div>
+    </div>
+
     <section class="py-20 bg-white relative border-t border-slate-200" id="pendaftaran">
         <div class="container mx-auto px-4">
             <div class="max-w-3xl mx-auto bg-slate-50 rounded-[2rem] p-8 md:p-12 shadow-card border border-slate-200 relative overflow-hidden">
@@ -806,7 +744,6 @@
             </div>
 
             <div class="space-y-4">
-                <!-- FAQ 1 -->
                 <div class="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
                     <button onclick="toggleFAQ(1)" class="w-full px-6 py-4 text-left font-bold text-brand-900 flex justify-between items-center hover:bg-slate-50 transition-colors">
                         Apakah pelatihan ini cocok untuk yang baru pertama kali Umrah?
@@ -816,7 +753,6 @@
                         Sangat cocok! Materi dirancang dari dasar, mulai dari filosofi, niat, hingga tata cara teknis di lapangan agar Anda benar-benar paham secara spiritual dan teknis.
                     </div>
                 </div>
-                <!-- FAQ 2 -->
                 <div class="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
                     <button onclick="toggleFAQ(2)" class="w-full px-6 py-4 text-left font-bold text-brand-900 flex justify-between items-center hover:bg-slate-50 transition-colors">
                         Bagaimana cara mendapatkan Free E-Book?
@@ -826,7 +762,6 @@
                         E-Book "The 6 Ways to Success and Happiness" akan dikirimkan langsung oleh admin melalui WhatsApp setelah Anda mengkonfirmasi pembayaran pendaftaran Anda.
                     </div>
                 </div>
-                <!-- FAQ 3 -->
                 <div class="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
                     <button onclick="toggleFAQ(3)" class="w-full px-6 py-4 text-left font-bold text-brand-900 flex justify-between items-center hover:bg-slate-50 transition-colors">
                         Apakah materi bisa direkam atau diakses ulang?
@@ -836,7 +771,6 @@
                         Khusus untuk peserta kelas Online, tautan rekaman sesi Zoom akan dibagikan di grup dan dapat diakses ulang untuk muraja'ah (mengulang materi).
                     </div>
                 </div>
-                <!-- FAQ 4 -->
                 <div class="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
                     <button onclick="toggleFAQ(4)" class="w-full px-6 py-4 text-left font-bold text-brand-900 flex justify-between items-center hover:bg-slate-50 transition-colors">
                         Apakah ada grup khusus setelah pelatihan?
@@ -846,7 +780,6 @@
                         Ya, peserta akan tergabung dalam grup aktif seputar ibadah haji dan umrah. Di sana Anda bisa berdiskusi dan tanya jawab terkait persiapan ke Baitullah.
                     </div>
                 </div>
-                <!-- FAQ 5 -->
                 <div class="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
                     <button onclick="toggleFAQ(5)" class="w-full px-6 py-4 text-left font-bold text-brand-900 flex justify-between items-center hover:bg-slate-50 transition-colors">
                         Bagaimana sistem pembayarannya?
@@ -862,24 +795,15 @@
 
     <footer class="bg-brand-900 pt-16 pb-8 border-t border-white/10 relative overflow-hidden text-sm">
         <div class="absolute inset-0 bg-mesh opacity-5 pointer-events-none"></div>
-        
         <div class="container mx-auto px-4 relative z-10">
             <div class="flex flex-col items-center justify-center text-center mb-12">
-                
-                <!-- Brand Logo (Image Placeholder) -->
                 <a href="#" class="flex items-center gap-2 mb-6">
-                    <!-- ========================================== -->
-                    <!-- ISI GAMBAR DISINI: LOGO FOOTER BAWAH       -->
-                    <!-- ========================================== -->
-                    <img src="assets/logossputih.png" alt="Logo Saghara Semesta" class="h-12 object-contain grayscale brightness-200 opacity-80 hover:opacity-100 transition-opacity">
+                    <img src="assets/logossputih.png" onerror="this.src='https://placehold.co/150x40/transparent/ffffff?text=Logo+Saghara'" alt="Logo Saghara Semesta" class="h-12 object-contain grayscale brightness-200 opacity-80 hover:opacity-100 transition-opacity">
                 </a>
-                
                 <h3 class="text-xl md:text-2xl font-serif text-brand-goldLight mb-6 italic max-w-2xl px-4">
                     "Sebaik-baik bekal adalah takwa. Persiapkan perjalanan sucimu dengan ilmu agar meraih mabrur yang hakiki."
                 </h3>
-                
             </div>
-            
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-center items-center text-xs text-slate-500">
                 <p>&copy; 2026 Saghara Semesta. Hak Cipta Dilindungi.</p>
             </div>
@@ -889,11 +813,8 @@
     <!-- Floating WhatsApp Button -->
     <a href="https://wa.me/6285210028919" target="_blank" class="fixed bottom-6 right-6 z-[100] bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg hover:bg-[#20bd5a] hover:scale-110 hover:-translate-y-1 transition-all duration-300 group">
         <i class="fab fa-whatsapp"></i>
-        <!-- Ping Indicator -->
         <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white animate-ping"></span>
         <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white"></span>
-        
-        <!-- Tooltip -->
         <span class="absolute right-16 bg-white text-slate-800 text-sm font-semibold px-4 py-2 rounded-xl shadow-card opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none origin-right transform scale-95 group-hover:scale-100 border border-slate-100">
             Chat Admin Saghara Semesta
         </span>
@@ -938,7 +859,7 @@
             });
         });
 
-        // Toggle FAQ Accordion
+        // Toggle FAQ
         function toggleFAQ(id) {
             const content = document.getElementById(`faq-content-${id}`);
             const icon = document.getElementById(`faq-icon-${id}`);
@@ -955,7 +876,6 @@
                         }
                     }
                 }
-                
                 content.classList.remove('hidden');
                 icon.classList.remove('fa-plus', 'text-brand-accent');
                 icon.classList.add('fa-minus', 'text-brand-900', 'rotate-180');
@@ -966,7 +886,6 @@
             }
         }
 
-        // Auto select package & Scroll to Form
         function selectPackageAndScroll(type) {
             const selectElement = document.getElementById('reg_package');
             if(type === 'Offline') {
@@ -974,15 +893,9 @@
             } else if (type === 'Online') {
                 selectElement.value = 'Online (Rp 50.000)';
             }
-            
-            // Scroll to form smoothly
-            document.getElementById('pendaftaran').scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'start' 
-            });
+            document.getElementById('pendaftaran').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        // Toggle Online Package Details
         function toggleOnlineDetails() {
             const details = document.getElementById('online-details');
             const icon = document.getElementById('icon-toggle-online');
@@ -1003,7 +916,6 @@
             }
         }
 
-        // Toggle Offline Package Details
         function toggleOfflineDetails() {
             const details = document.getElementById('offline-details');
             const icon = document.getElementById('icon-toggle-offline');
@@ -1024,7 +936,6 @@
             }
         }
 
-        // Send to WhatsApp Function
         function sendToWA(event) {
             event.preventDefault(); 
             
@@ -1039,9 +950,7 @@
             message += `- Nama: ${name}\n`;
             message += `- No. WA: ${phone}\n`;
             message += `- Domisili: ${domisili}\n`;
-            if (email) {
-                message += `- Email: ${email}\n`;
-            }
+            if (email) message += `- Email: ${email}\n`;
             message += `- Pilihan Kelas: *${packageChoice}*\n\n`;
             message += `Mohon informasi instruksi pembayaran selanjutnya. Terima kasih.`;
 
@@ -1050,29 +959,22 @@
             window.open(`https://wa.me/${waNumber}?text=${encodedMessage}`, '_blank');
         }
 
-        // Fungsi untuk membuka Modal Video
+        // ==========================================
+        // FUNGSI MODAL VIDEO
+        // ==========================================
         function openVideoModal(videoId) {
             const modal = document.getElementById('video-modal');
             const modalContent = document.getElementById('video-modal-content');
             
-            // Sembunyikan player terlebih dahulu
             document.getElementById('video-player-1').classList.add('hidden');
-            
-            // Hentikan video yang mungkin sedang berjalan (Reset)
             document.getElementById('video-player-1').pause();
             
-            // Tampilkan player
             let activePlayer = document.getElementById('video-player-1');
-            
-            if(activePlayer) {
-                activePlayer.classList.remove('hidden');
-            }
+            if(activePlayer) activePlayer.classList.remove('hidden');
 
-            // Tampilkan Modal dengan animasi
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             
-            // Sedikit delay agar transisi CSS bekerja
             setTimeout(() => {
                 modal.classList.remove('opacity-0');
                 modal.classList.add('opacity-100');
@@ -1080,41 +982,128 @@
                 modalContent.classList.add('scale-100');
             }, 10);
             
-            // Otomatis mainkan video (jika browser mengizinkan)
             if(activePlayer) {
-                activePlayer.play().catch(error => {
-                    console.log("Autoplay dicegah oleh browser, user harus menekan play manual.");
-                });
+                activePlayer.play().catch(e => console.log("Autoplay dicegah browser"));
             }
         }
 
-        // Fungsi untuk menutup Modal Video
         function closeVideoModal() {
             const modal = document.getElementById('video-modal');
             const modalContent = document.getElementById('video-modal-content');
             
-            // Animasi menghilang
             modal.classList.remove('opacity-100');
             modal.classList.add('opacity-0');
             modalContent.classList.remove('scale-100');
             modalContent.classList.add('scale-95');
             
-            // Hentikan video saat modal ditutup
             document.getElementById('video-player-1').pause();
             
-            // Sembunyikan modal setelah animasi selesai
             setTimeout(() => {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
             }, 300);
         }
 
-        // Tutup modal jika klik di luar area video
         document.getElementById('video-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeVideoModal();
-            }
+            if (e.target === this) closeVideoModal();
         });
+
+        // ==========================================
+        // FUNGSI MODAL GAMBAR (BARU)
+        // ==========================================
+        function openImageModal(imgSrc) {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-image-src');
+            
+            // Set sumber gambar ke modal
+            modalImg.src = imgSrc;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Delay untuk transisi
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.classList.add('opacity-100');
+                modalImg.classList.remove('scale-95');
+                modalImg.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-image-src');
+            
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                modalImg.src = ''; // Bersihkan src
+            }, 300);
+        }
+
+        // ==========================================
+        // LOGIKA AUTO-SCROLL TESTIMONI (BISA DI-DRAG)
+        // ==========================================
+        const testContainer = document.getElementById('testimonial-scroll-container');
+        let isAutoScrolling = true;
+        let scrollSpeed = 1; // Kecepatan ditingkatkan agar pergerakan lebih terlihat
+        let reqAnimationId;
+
+        function autoScrollTestimoni() {
+            if (isAutoScrolling && testContainer) {
+                testContainer.scrollTop += scrollSpeed;
+                
+                // Logika looping: jika sudah scroll setengah jalan (karena konten diduplikat 2 set)
+                // Kita kembalikan ke atas agar seolah tak terbatas
+                if (testContainer.scrollTop >= (testContainer.scrollHeight / 2)) {
+                    testContainer.scrollTop = 0;
+                }
+            }
+            reqAnimationId = requestAnimationFrame(autoScrollTestimoni);
+        }
+
+        // Mulai animasi
+        if(testContainer) {
+            reqAnimationId = requestAnimationFrame(autoScrollTestimoni);
+
+            // Hentikan auto-scroll jika disentuh/di-hover pengguna (agar bisa scroll manual)
+            testContainer.addEventListener('mouseenter', () => isAutoScrolling = false);
+            testContainer.addEventListener('mouseleave', () => isAutoScrolling = true);
+            testContainer.addEventListener('touchstart', () => isAutoScrolling = false, {passive: true});
+            testContainer.addEventListener('touchend', () => isAutoScrolling = true);
+            
+            // Tambahan fitur drag untuk mouse di desktop
+            let isDown = false;
+            let startY;
+            let scrollTop;
+
+            testContainer.addEventListener('mousedown', (e) => {
+                isDown = true;
+                isAutoScrolling = false;
+                testContainer.classList.add('active:cursor-grabbing');
+                startY = e.pageY - testContainer.offsetTop;
+                scrollTop = testContainer.scrollTop;
+            });
+
+            testContainer.addEventListener('mouseup', () => {
+                isDown = false;
+                isAutoScrolling = true;
+                testContainer.classList.remove('active:cursor-grabbing');
+            });
+
+            testContainer.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const y = e.pageY - testContainer.offsetTop;
+                const walk = (y - startY) * 1.5; // Scroll-fast
+                testContainer.scrollTop = scrollTop - walk;
+            });
+        }
     </script>
 </body>
 </html>
