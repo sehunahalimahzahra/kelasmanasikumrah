@@ -187,29 +187,33 @@
                         </div>
                     </div>
 
-                    <!-- Video Container (Dengan Autoplay, Muted, Loop) -->
-                    <div class="relative rounded-[2rem] p-2 bg-white/5 border border-white/10 shadow-glow-blue z-10 backdrop-blur-sm group hover:shadow-glow-gold transition-shadow duration-500">
+                    <!-- Video Container (Klik untuk Popup) -->
+                    <div class="relative rounded-[2rem] p-2 bg-white/5 border border-white/10 shadow-glow-blue z-10 backdrop-blur-sm group hover:shadow-glow-gold transition-shadow duration-500 cursor-pointer" 
+                         onclick="openEmbedVideoModal('https://youtu.be/oivF1-2oRLg', false)">
+                        
                         <div class="absolute inset-0 bg-gradient-to-r from-brand-accent/20 via-transparent to-brand-gold/20 rounded-[2rem] opacity-0 group-hover:opacity-100 transition duration-700 pointer-events-none"></div>
                         
-                        <div class="relative rounded-[1.5rem] overflow-hidden aspect-video bg-brand-800 flex items-center justify-center shadow-inner">
-                            <!-- Menambahkan atribut autoplay muted loop playsinline -->
-                            <video class="w-full h-full object-cover" controls autoplay muted loop playsinline 
-                                   poster="https://placehold.co/1920x1080/0F172A/ffffff?font=inter&text=THUMBNAIL+VIDEO">
-                                
-                                <!-- GANTI "assets/video_promo.mp4" dengan nama file video Anda yang sebenarnya -->
-                                <source src="assets/video_promo.mp4" type="video/mp4">
-                                
-                                Browser Anda tidak mendukung video.
-                            </video>
+                        <div class="relative rounded-[1.5rem] overflow-hidden aspect-video bg-brand-800 flex items-center justify-center shadow-inner group-hover:scale-[1.02] transition-transform duration-500">
                             
-                            <div class="absolute top-0 left-0 w-full p-4 flex justify-between items-center pointer-events-none bg-gradient-to-b from-black/50 to-transparent">
+                            <!-- Thumbnail Video -->
+                            <img src="assets/program1.png" alt="Thumbnail Promo" class="w-full h-full object-cover opacity-80">
+                            
+                            <!-- Tombol Play Overlay -->
+                            <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+                                <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/40 group-hover:scale-110 transition-transform shadow-glow-gold">
+                                    <i class="fas fa-play text-4xl text-white ml-2"></i>
+                                </div>
+                            </div>
+
+                            <!-- Label Highlight -->
+                            <div class="absolute top-0 left-0 w-full p-4 flex justify-between items-center pointer-events-none bg-gradient-to-b from-black/60 to-transparent">
                                 <div class="flex gap-1.5">
                                     <div class="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
                                     <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
                                     <div class="w-2.5 h-2.5 rounded-full bg-green-500/80"></div>
                                 </div>
                                 <div class="glass-panel px-3 py-1 rounded-full text-[10px] text-white/90 tracking-widest font-mono uppercase border-white/20">
-                                    Highlight Pelatihan
+                                    Putar Video Promo
                                 </div>
                             </div>
                         </div>
@@ -217,7 +221,7 @@
                 </div>
 
                 <button onclick="document.getElementById('paket').scrollIntoView({behavior: 'smooth'})" class="inline-flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors group cursor-pointer bg-transparent border-none">
-                    Lihat Pilihan Kelas <i class="fas fa-arrow-down transform group-hover:translate-y-1 transition-transform"></i>
+                    Likat Pilihan Kelas <i class="fas fa-arrow-down transform group-hover:translate-y-1 transition-transform"></i>
                 </button>
             </div>
         </div>
@@ -345,7 +349,8 @@
                 
                 <!-- Testimoni Video -->
                 <div class="w-full lg:w-5/12 shrink-0">
-                    <div class="relative rounded-[2rem] overflow-hidden aspect-[4/5] bg-slate-800 shadow-card hover:shadow-2xl transition-all duration-300 group cursor-pointer w-full max-w-md mx-auto" onclick="openVideoModal('video1')">
+                    <div class="relative rounded-[2rem] overflow-hidden aspect-[4/5] bg-slate-800 shadow-card hover:shadow-2xl transition-all duration-300 group cursor-pointer w-full max-w-md mx-auto" 
+                         onclick="openEmbedVideoModal('https://www.youtube.com/embed/YOUR_SHORT_VIDEO_ID?autoplay=1', true)">
                         <img src="https://placehold.co/1080x1350/0F172A/ffffff?font=inter&text=THUMBNAIL+TESTIMONI" alt="Thumbnail Testimoni" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                         
                         <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors flex items-center justify-center">
@@ -480,20 +485,16 @@
         </div>
     </section>
 
-    <!-- Modal Pop-up Video Testimoni -->
-    <div id="video-modal" class="fixed inset-0 z-[150] hidden items-center justify-center bg-black/90 backdrop-blur-sm opacity-0 transition-opacity duration-300">
-        <button onclick="closeVideoModal()" class="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-colors border border-white/20 z-[160]">
+    <!-- Modal Pop-up Video Embed (YouTube/FB/IG) -->
+    <div id="embed-video-modal" class="fixed inset-0 z-[150] hidden items-center justify-center bg-black/95 backdrop-blur-md opacity-0 transition-opacity duration-300" onclick="closeEmbedVideoModal()">
+        <button class="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/30 text-white rounded-full flex items-center justify-center transition-colors border border-white/20 z-[160]" onclick="closeEmbedVideoModal()">
             <i class="fas fa-times text-xl"></i>
         </button>
 
-        <div class="relative w-full max-w-sm max-h-[90vh] mx-4 rounded-3xl overflow-hidden shadow-2xl border border-white/10 transform scale-95 transition-transform duration-300" id="video-modal-content">
-            <div class="relative aspect-[9/16] bg-black">
-                <video id="video-player-1" class="w-full h-full object-cover hidden" controls playsinline>
-                    
-                    <!-- GANTI "assets/video_testimoni.mp4" dengan nama file video Anda yang sebenarnya -->
-                    <source src="assets/video_testimoni.mp4" type="video/mp4">
-                    
-                </video>
+        <!-- Responsive Iframe Container -->
+        <div class="relative w-full mx-4 rounded-3xl overflow-hidden shadow-2xl border border-white/10 transform scale-95 transition-transform duration-300" id="embed-video-modal-content" onclick="event.stopPropagation();">
+            <div class="relative bg-black w-full" id="iframe-container">
+                <iframe id="video-iframe" class="absolute top-0 left-0 w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -966,17 +967,29 @@
         }
 
         // ==========================================
-        // FUNGSI MODAL VIDEO
+        // FUNGSI MODAL EMBED VIDEO (YouTube/FB/IG)
         // ==========================================
-        function openVideoModal(videoId) {
-            const modal = document.getElementById('video-modal');
-            const modalContent = document.getElementById('video-modal-content');
+        function openEmbedVideoModal(videoUrl, isVertical = false) {
+            const modal = document.getElementById('embed-video-modal');
+            const modalContent = document.getElementById('embed-video-modal-content');
+            const iframeContainer = document.getElementById('iframe-container');
+            const iframe = document.getElementById('video-iframe');
             
-            document.getElementById('video-player-1').classList.add('hidden');
-            document.getElementById('video-player-1').pause();
-            
-            let activePlayer = document.getElementById('video-player-1');
-            if(activePlayer) activePlayer.classList.remove('hidden');
+            // Atur rasio berdasarkan jenis video (Horizontal vs Vertikal)
+            if (isVertical) {
+                iframeContainer.classList.remove('aspect-video');
+                iframeContainer.classList.add('aspect-[9/16]');
+                modalContent.classList.remove('max-w-4xl');
+                modalContent.classList.add('max-w-sm'); // Lebar kecil untuk format HP
+            } else {
+                iframeContainer.classList.add('aspect-video');
+                iframeContainer.classList.remove('aspect-[9/16]');
+                modalContent.classList.add('max-w-4xl'); // Lebar penuh untuk format Landscape
+                modalContent.classList.remove('max-w-sm');
+            }
+
+            // Masukkan link URL ke iframe
+            iframe.src = videoUrl;
 
             modal.classList.remove('hidden');
             modal.classList.add('flex');
@@ -987,47 +1000,36 @@
                 modalContent.classList.remove('scale-95');
                 modalContent.classList.add('scale-100');
             }, 10);
-            
-            if(activePlayer) {
-                activePlayer.play().catch(e => console.log("Autoplay dicegah browser"));
-            }
         }
 
-        function closeVideoModal() {
-            const modal = document.getElementById('video-modal');
-            const modalContent = document.getElementById('video-modal-content');
+        function closeEmbedVideoModal() {
+            const modal = document.getElementById('embed-video-modal');
+            const modalContent = document.getElementById('embed-video-modal-content');
+            const iframe = document.getElementById('video-iframe');
             
             modal.classList.remove('opacity-100');
             modal.classList.add('opacity-0');
             modalContent.classList.remove('scale-100');
             modalContent.classList.add('scale-95');
             
-            document.getElementById('video-player-1').pause();
-            
             setTimeout(() => {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
+                iframe.src = ''; // Bersihkan src agar video berhenti berputar
             }, 300);
         }
 
-        document.getElementById('video-modal').addEventListener('click', function(e) {
-            if (e.target === this) closeVideoModal();
-        });
-
         // ==========================================
-        // FUNGSI MODAL GAMBAR (BARU)
+        // FUNGSI MODAL GAMBAR 
         // ==========================================
         function openImageModal(imgSrc) {
             const modal = document.getElementById('image-modal');
             const modalImg = document.getElementById('modal-image-src');
             
-            // Set sumber gambar ke modal
             modalImg.src = imgSrc;
-
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             
-            // Delay untuk transisi
             setTimeout(() => {
                 modal.classList.remove('opacity-0');
                 modal.classList.add('opacity-100');
@@ -1048,7 +1050,7 @@
             setTimeout(() => {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
-                modalImg.src = ''; // Bersihkan src
+                modalImg.src = ''; 
             }, 300);
         }
 
@@ -1057,15 +1059,14 @@
         // ==========================================
         const testContainer = document.getElementById('testimonial-scroll-container');
         let isAutoScrolling = true;
-        let scrollSpeed = 1; // Kecepatan ditingkatkan agar pergerakan lebih terlihat
+        let scrollSpeed = 1; 
         let reqAnimationId;
 
         function autoScrollTestimoni() {
             if (isAutoScrolling && testContainer) {
                 testContainer.scrollTop += scrollSpeed;
                 
-                // Logika looping: jika sudah scroll setengah jalan (karena konten diduplikat 2 set)
-                // Kita kembalikan ke atas agar seolah tak terbatas
+                // Logika looping
                 if (testContainer.scrollTop >= (testContainer.scrollHeight / 2)) {
                     testContainer.scrollTop = 0;
                 }
@@ -1073,17 +1074,14 @@
             reqAnimationId = requestAnimationFrame(autoScrollTestimoni);
         }
 
-        // Mulai animasi
         if(testContainer) {
             reqAnimationId = requestAnimationFrame(autoScrollTestimoni);
 
-            // Hentikan auto-scroll jika disentuh/di-hover pengguna (agar bisa scroll manual)
             testContainer.addEventListener('mouseenter', () => isAutoScrolling = false);
             testContainer.addEventListener('mouseleave', () => isAutoScrolling = true);
             testContainer.addEventListener('touchstart', () => isAutoScrolling = false, {passive: true});
             testContainer.addEventListener('touchend', () => isAutoScrolling = true);
             
-            // Tambahan fitur drag untuk mouse di desktop
             let isDown = false;
             let startY;
             let scrollTop;
@@ -1106,7 +1104,7 @@
                 if (!isDown) return;
                 e.preventDefault();
                 const y = e.pageY - testContainer.offsetTop;
-                const walk = (y - startY) * 1.5; // Scroll-fast
+                const walk = (y - startY) * 1.5; 
                 testContainer.scrollTop = scrollTop - walk;
             });
         }
