@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pelatihan Manasik Umrah - Ust. Asep Nurhidayat</title>
     
-    <!-- Tambahkan baris ini untuk logo di tab browser (Favicon) -->
+    <!-- Favicon -->
     <link rel="icon" href="assets/logo3.png" type="image/png">
     
     <!-- Tailwind CSS -->
@@ -14,7 +14,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts: Inter untuk tampilan modern & Playfair untuk sentuhan klasik -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
     
     <script>
@@ -41,10 +41,6 @@
                         'glow-blue': '0 0 45px -10px rgba(79, 138, 238, 0.4)',
                         'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
                         'card': '0 10px 30px -5px rgba(15, 23, 42, 0.08)',
-                    },
-                    backgroundImage: {
-                        'radial-glow': 'radial-gradient(circle at center, rgba(79,138,238,0.2) 0%, rgba(11,37,89,1) 70%)',
-                        'mesh': 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
                     }
                 }
             }
@@ -91,12 +87,15 @@
         ::-webkit-scrollbar-thumb { background: #1D53B8; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
 
-        /* Styling for manual scroll behavior on testimonials */
         #testimonial-scroll-container {
-            /* Allow dragging visually without selecting text */
             user-select: none; 
             -webkit-user-select: none;
-            /* Menghilangkan scroll-snap agar animasi JS berjalan mulus */
+        }
+
+        /* Efek Mesh Background tanpa base64 */
+        .bg-mesh-pattern {
+            background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
         }
     </style>
 </head>
@@ -105,12 +104,10 @@
     <nav class="fixed w-full z-50 transition-all duration-300 py-4" id="navbar">
         <div class="container mx-auto px-4 md:px-8">
             <div class="rounded-full px-6 py-3 flex justify-between items-center border border-white/50 shadow-lg bg-white/40 backdrop-blur-md hover:bg-white/60 transition-all duration-300">
-                <!-- Logo -->
                 <a href="#" class="flex items-center gap-2 group">
                     <img src="assets/logoss.png" onerror="this.src='https://placehold.co/150x40/transparent/0B2559?text=Logo+Saghara'" alt="Logo Saghara Semesta" class="h-8 md:h-10 object-contain">
                 </a>
                 
-                <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6 items-center text-sm font-bold">
                     <a href="#profil" class="text-brand-900 hover:text-brand-accent transition">Narasumber</a>
                     <a href="#materi" class="text-brand-900 hover:text-brand-accent transition">Materi</a>
@@ -119,7 +116,6 @@
                     <a href="#faq" class="text-brand-900 hover:text-brand-accent transition">FAQ</a>
                 </div>
 
-                <!-- CTA & Mobile Toggle -->
                 <div class="flex items-center gap-4">
                     <button onclick="document.getElementById('pendaftaran').scrollIntoView({behavior: 'smooth'})" class="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-bold text-brand-900 bg-brand-gold hover:bg-brand-goldLight rounded-full transition-all shadow-glow-gold hover:-translate-y-0.5">
                         Daftar Sekarang
@@ -131,7 +127,6 @@
             </div>
         </div>
         
-        <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden absolute top-20 left-4 right-4 rounded-2xl border border-white/50 shadow-2xl overflow-hidden backdrop-blur-xl bg-white/95">
             <div class="px-4 py-4 space-y-2 flex flex-col text-sm font-bold">
                 <a href="#profil" class="block px-4 py-3 text-brand-900 hover:bg-slate-100 rounded-lg transition">Narasumber</a>
@@ -145,9 +140,8 @@
     </nav>
 
     <header class="relative min-h-[95vh] bg-brand-900 flex items-center justify-center pt-28 pb-20 overflow-hidden">
-        <!-- Background Effects -->
-        <div class="absolute inset-0 bg-radial-glow z-0"></div>
-        <div class="absolute inset-0 bg-mesh opacity-20 z-0 mix-blend-screen"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-brand-800 to-brand-900 z-0"></div>
+        <div class="absolute inset-0 bg-mesh-pattern opacity-20 z-0"></div>
         <div class="absolute top-1/4 -left-32 w-96 h-96 bg-brand-accent/30 rounded-full blur-[100px] pointer-events-none"></div>
         <div class="absolute bottom-1/4 -right-32 w-96 h-96 bg-brand-gold/20 rounded-full blur-[100px] pointer-events-none"></div>
 
@@ -190,25 +184,20 @@
                         </div>
                     </div>
 
-                    <!-- Video Container (Klik untuk Popup) -->
                     <div class="relative rounded-[2rem] p-2 bg-white/5 border border-white/10 shadow-glow-blue z-10 backdrop-blur-sm group hover:shadow-glow-gold transition-shadow duration-500 cursor-pointer" 
                      onclick="openEmbedVideoModal('https://www.youtube.com/embed/n73RB99fdnU?autoplay=1', false)">
                         
                         <div class="absolute inset-0 bg-gradient-to-r from-brand-accent/20 via-transparent to-brand-gold/20 rounded-[2rem] opacity-0 group-hover:opacity-100 transition duration-700 pointer-events-none"></div>
                         
                         <div class="relative rounded-[1.5rem] overflow-hidden aspect-video bg-brand-800 flex items-center justify-center shadow-inner group-hover:scale-[1.02] transition-transform duration-500">
+                            <img src="assets/program1.png" onerror="this.src='https://placehold.co/1280x720/1E293B/D4AF37?text=Thumbnail+Promo'" alt="Thumbnail Promo" class="w-full h-full object-cover opacity-80">
                             
-                            <!-- Thumbnail Video -->
-                            <img src="assets/program1.png" alt="Thumbnail Promo" class="w-full h-full object-cover opacity-80">
-                            
-                            <!-- Tombol Play Overlay -->
                             <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
                                 <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/40 group-hover:scale-110 transition-transform shadow-glow-gold">
                                     <i class="fas fa-play text-4xl text-white ml-2"></i>
                                 </div>
                             </div>
 
-                            <!-- Label Highlight -->
                             <div class="absolute top-0 left-0 w-full p-4 flex justify-between items-center pointer-events-none bg-gradient-to-b from-black/60 to-transparent">
                                 <div class="flex gap-1.5">
                                     <div class="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
@@ -233,7 +222,6 @@
     </header>
 
     <main class="bg-slate-50 relative z-20 pb-20">
-        
         <div class="container mx-auto px-4 pt-16 pb-8 text-center" id="profil">
             <div class="inline-block bg-blue-50 text-brand-accent px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase mb-3 hover:bg-blue-100 transition-colors cursor-pointer">
                 Pakar & Materi
@@ -244,8 +232,6 @@
 
         <div class="container mx-auto px-4 md:px-6">
             <div class="flex flex-col gap-6 max-w-6xl mx-auto">
-                
-                <!-- Profil Narasumber -->
                 <div class="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-card border border-slate-100 flex flex-col md:flex-row gap-12 items-center md:items-start group hover:shadow-2xl transition-all duration-500 relative overflow-hidden">
                     <div class="absolute -right-32 -top-32 w-96 h-96 bg-gradient-to-br from-brand-accent/5 to-brand-gold/10 rounded-full blur-3xl group-hover:bg-brand-accent/15 transition-colors duration-700 pointer-events-none"></div>
                     
@@ -295,14 +281,10 @@
                                 <div class="w-10 h-10 shrink-0 rounded-full bg-blue-100 text-brand-accent flex items-center justify-center group-hover/badge:scale-110 transition-transform"><i class="fas fa-mosque"></i></div>
                                 <span class="text-xs font-semibold text-slate-700 leading-tight">Da'i Bersertifikat MUI</span>
                             </div>
-                            
-                            <!-- Tambahan Baru: Tour Guide -->
                             <div class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100 hover:border-brand-accent/50 hover:bg-blue-50 transition-all cursor-default group/badge hover:shadow-md">
                                 <div class="w-10 h-10 shrink-0 rounded-full bg-blue-100 text-brand-accent flex items-center justify-center group-hover/badge:scale-110 transition-transform"><i class="fas fa-route"></i></div>
                                 <span class="text-xs font-semibold text-slate-700 leading-tight">Tour Guide Bersertifikat BNSP</span>
                             </div>
-
-                            <!-- Tambahan Baru: Penulis Buku -->
                             <div class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100 hover:border-brand-accent/50 hover:bg-blue-50 transition-all cursor-default group/badge hover:shadow-md">
                                 <div class="w-10 h-10 shrink-0 rounded-full bg-blue-100 text-brand-accent flex items-center justify-center group-hover/badge:scale-110 transition-transform"><i class="fas fa-book"></i></div>
                                 <span class="text-xs font-semibold text-slate-700 leading-tight">Penulis Buku</span>
@@ -311,7 +293,6 @@
                     </div>
                 </div>
 
-                <!-- Materi Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-6" id="materi">
                     <div class="bg-white rounded-[2rem] p-6 md:p-8 shadow-card border border-slate-100 hover:border-brand-accent/30 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col group cursor-pointer">
                         <div class="w-12 h-12 rounded-2xl bg-blue-50 text-brand-accent flex items-center justify-center text-xl mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform">
@@ -335,7 +316,7 @@
                     </div>
 
                     <div class="bg-brand-900 rounded-[2rem] p-6 md:p-8 shadow-card border border-brand-800 text-white relative overflow-hidden flex flex-col group hover:shadow-glow-blue hover:-translate-y-2 transition-all duration-300 cursor-pointer">
-                        <div class="absolute inset-0 bg-mesh opacity-10"></div>
+                        <div class="absolute inset-0 bg-mesh-pattern opacity-10"></div>
                         <div class="absolute right-0 top-0 w-full h-full bg-gradient-to-br from-brand-accent/20 to-transparent mix-blend-overlay opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
                         
                         <div class="w-12 h-12 shrink-0 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-xl relative z-10 backdrop-blur-sm mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform">
@@ -362,12 +343,12 @@
 
             <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center lg:items-stretch">
                 
-                <!-- Testimoni Video -->
+                <!-- Testimoni Video (Dengan path file relatif yang diperbaiki) -->
                 <div class="w-full lg:w-5/12 shrink-0">
                     <div class="relative rounded-[2rem] overflow-hidden aspect-[4/5] bg-slate-800 shadow-card hover:shadow-2xl transition-all duration-300 group cursor-pointer w-full max-w-md mx-auto" 
-                         onclick="openLocalVideoModal('assets/testimoni.mp4')">
+                         onclick="openLocalVideoModal('./assets/testimoni.mp4')">
                         
-                        <img src="assets/aa.png" alt="Thumbnail Testimoni" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <img src="assets/aa.png" onerror="this.src='https://placehold.co/1080x1350/1E293B/D4AF37?text=Testimoni'" alt="Thumbnail Testimoni" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                         
                         <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors flex items-center justify-center">
                             <div class="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/40 group-hover:scale-110 transition-transform shadow-glow-gold">
@@ -382,17 +363,13 @@
                     </div>
                 </div>
 
-                <!-- Testimoni Teks Berjalan (Auto scroll + Manual drag) -->
+                <!-- Testimoni Teks Berjalan -->
                 <div class="w-full lg:w-7/12 relative h-[550px] lg:h-[650px] rounded-[2rem] bg-slate-50 border border-slate-100 shadow-inner overflow-hidden">
-                    <!-- Efek Blur/Gradien -->
                     <div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-slate-50 to-transparent z-10 pointer-events-none rounded-t-[2rem]"></div>
                     <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-slate-50 to-transparent z-10 pointer-events-none rounded-b-[2rem]"></div>
                     
-                    <!-- Container Scrollable -->
                     <div id="testimonial-scroll-container" class="w-full h-full overflow-y-auto hide-scrollbar p-4 lg:p-6 cursor-grab active:cursor-grabbing">
                         <div class="flex flex-col gap-6" id="testimonial-inner">
-                            
-                            <!-- SET 1 (4 Testimoni) -->
                             <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col transition-transform cursor-default select-none">
                                 <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
                                 <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Penyampaian materinya sangat mudah dipahami. Alhamdulillah, persiapan umrah pertama saya menjadi lebih tenang dan mantap berkat bimbingan beliau."</p>
@@ -430,7 +407,7 @@
                             </div>
 
                             <div class="bg-brand-900 text-white border border-brand-800 p-6 md:p-8 rounded-[1.5rem] shadow-md flex flex-col transition-transform cursor-default relative overflow-hidden select-none">
-                                <div class="absolute inset-0 bg-mesh opacity-10"></div>
+                                <div class="absolute inset-0 bg-mesh-pattern opacity-10"></div>
                                 <div class="text-brand-goldLight text-2xl mb-4 opacity-80 relative z-10"><i class="fas fa-quote-left"></i></div>
                                 <p class="text-slate-300 text-sm leading-relaxed italic mb-6 relative z-10">"Tidak hanya teori, tapi pemantapan tauhidnya sangat menyentuh hati. Kami sekeluarga siap berangkat ke Baitullah dengan niat yang lurus."</p>
                                 <div class="flex items-center gap-3 mt-auto relative z-10">
@@ -442,7 +419,7 @@
                                 </div>
                             </div>
 
-                            <!-- SET 2 (DUPLIKAT AGAR SCROLL MULUS JS) -->
+                            <!-- DUPLIKAT LOOP -->
                             <div class="bg-white border border-slate-100 p-6 md:p-8 rounded-[1.5rem] shadow-sm flex flex-col transition-transform cursor-default select-none">
                                 <div class="text-brand-gold text-2xl mb-4 opacity-50"><i class="fas fa-quote-left"></i></div>
                                 <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Penyampaian materinya sangat mudah dipahami. Alhamdulillah, persiapan umrah pertama saya menjadi lebih tenang dan mantap berkat bimbingan beliau."</p>
@@ -480,7 +457,7 @@
                             </div>
 
                             <div class="bg-brand-900 text-white border border-brand-800 p-6 md:p-8 rounded-[1.5rem] shadow-md flex flex-col transition-transform cursor-default relative overflow-hidden select-none">
-                                <div class="absolute inset-0 bg-mesh opacity-10"></div>
+                                <div class="absolute inset-0 bg-mesh-pattern opacity-10"></div>
                                 <div class="text-brand-goldLight text-2xl mb-4 opacity-80 relative z-10"><i class="fas fa-quote-left"></i></div>
                                 <p class="text-slate-300 text-sm leading-relaxed italic mb-6 relative z-10">"Tidak hanya teori, tapi pemantapan tauhidnya sangat menyentuh hati. Kami sekeluarga siap berangkat ke Baitullah dengan niat yang lurus."</p>
                                 <div class="flex items-center gap-3 mt-auto relative z-10">
@@ -491,7 +468,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -506,7 +482,6 @@
             <i class="fas fa-times text-xl"></i>
         </button>
 
-        <!-- Responsive Iframe Container -->
         <div class="relative w-full mx-4 rounded-3xl overflow-hidden shadow-2xl border border-white/10 transform scale-95 transition-transform duration-300" id="embed-video-modal-content" onclick="event.stopPropagation();">
             <div class="relative bg-black w-full" id="iframe-container">
                 <iframe id="video-iframe" class="absolute top-0 left-0 w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -514,13 +489,12 @@
         </div>
     </div>
 
-    <!-- Modal Pop-up Video Local (MP4) -->
+    <!-- Modal Pop-up Video Local (MP4) - INJECT METHOD -->
     <div id="local-video-modal" class="fixed inset-0 z-[150] hidden items-center justify-center bg-black/95 backdrop-blur-md opacity-0 transition-opacity duration-300" onclick="closeLocalVideoModal()">
         <button class="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/30 text-white rounded-full flex items-center justify-center transition-colors border border-white/20 z-[160]" onclick="closeLocalVideoModal()">
             <i class="fas fa-times text-xl"></i>
         </button>
 
-        <!-- Responsive Video Container (Vertikal) -->
         <div class="relative w-full max-w-sm mx-4 rounded-3xl overflow-hidden shadow-2xl border border-white/10 transform scale-95 transition-transform duration-300" id="local-video-modal-content" onclick="event.stopPropagation();">
             <!-- Tempat Video di Inject oleh JS -->
             <div id="local-video-container" class="relative bg-black w-full aspect-[4/5] md:aspect-[9/16]">
@@ -529,7 +503,6 @@
     </div>
 
     <section class="py-24 bg-slate-50 relative border-t border-slate-200" id="paket">
-        
         <div class="container mx-auto px-4 mb-16">
             <div class="max-w-4xl mx-auto bg-gradient-to-r from-amber-100 via-amber-50 to-white border border-amber-200 rounded-[2rem] p-6 md:p-10 flex flex-col md:flex-row items-center gap-8 shadow-lg relative overflow-hidden hover:shadow-xl transition-shadow duration-300">
                 <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-brand-gold/10 rounded-full blur-3xl"></div>
@@ -557,17 +530,13 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                
                 <!-- KELAS ONLINE CARD -->
                 <div class="bg-white rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden">
-                    
-                    <!-- Menambahkan onclick untuk memanggil modal gambar -->
                     <div class="relative w-full aspect-[4/5] bg-slate-100 overflow-hidden cursor-pointer" onclick="openImageModal(this.querySelector('img').src)">
                         <img src="assets/flayer1.png" onerror="this.src='https://placehold.co/1080x1350/e2e8f0/0B2559?text=Poster+Kelas+Online'" alt="Flyer Manasik Online" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
                         <div class="absolute top-4 left-4 bg-brand-accent text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md uppercase tracking-wide">
                             Kelas Online
                         </div>
-                        <!-- Indikator bisa di klik -->
                         <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
                             <i class="fas fa-search-plus text-white text-4xl shadow-sm"></i>
                         </div>
@@ -590,7 +559,7 @@
                                 </h4>
                                 <div class="flex items-start gap-3">
                                     <span class="text-slate-400 mt-0.5 shrink-0 w-4 text-center"><i class="far fa-calendar"></i></span>
-                                    <span class="font-medium text-slate-700">Minggu/Ahad, 30 Agustus 2026</span>
+                                    <span class="font-medium text-slate-700">Minggu/Ahad, 16 Agustus 2026</span>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <span class="text-slate-400 mt-0.5 shrink-0 w-4 text-center"><i class="far fa-clock"></i></span>
@@ -629,14 +598,11 @@
 
                 <!-- KELAS OFFLINE CARD -->
                 <div class="bg-white rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden">
-                    
-                    <!-- Menambahkan onclick untuk memanggil modal gambar -->
                     <div class="relative w-full aspect-[4/5] bg-slate-100 overflow-hidden cursor-pointer" onclick="openImageModal(this.querySelector('img').src)">
                         <img src="assets/flayer2.png" onerror="this.src='https://placehold.co/1080x1350/e2e8f0/B49020?text=Poster+Kelas+Offline'" alt="Flyer Manasik Offline" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
                         <div class="absolute top-4 right-4 bg-brand-goldDark text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md uppercase tracking-wide">
                             Kelas Offline
                         </div>
-                        <!-- Indikator bisa di klik -->
                         <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
                             <i class="fas fa-search-plus text-white text-4xl shadow-sm"></i>
                         </div>
@@ -714,7 +680,6 @@
         <button class="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/30 text-white rounded-full flex items-center justify-center transition-colors border border-white/20 z-[160]" onclick="closeImageModal()">
             <i class="fas fa-times text-xl"></i>
         </button>
-        <!-- Kontainer gambar agar tidak overflow screen -->
         <div class="relative max-w-[95vw] max-h-[95vh] p-4 flex items-center justify-center">
             <img id="modal-image-src" src="" class="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl transform scale-95 transition-transform duration-300" onclick="event.stopPropagation();">
         </div>
@@ -830,7 +795,7 @@
     </section>
 
     <footer class="bg-brand-900 pt-16 pb-8 border-t border-white/10 relative overflow-hidden text-sm">
-        <div class="absolute inset-0 bg-mesh opacity-5 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-mesh-pattern opacity-5 pointer-events-none"></div>
         <div class="container mx-auto px-4 relative z-10">
             <div class="flex flex-col items-center justify-center text-center mb-12">
                 <a href="#" class="flex items-center gap-2 mb-6">
@@ -1048,14 +1013,15 @@
 
         // ==========================================
         // FUNGSI MODAL LOCAL VIDEO (MP4) - INJECT METHOD
+        // Menggunakan ./assets/ untuk fix path issue
         // ==========================================
         function openLocalVideoModal(videoUrl) {
+            console.log("Mencoba memuat video dari:", videoUrl); // Untuk debug
             const modal = document.getElementById('local-video-modal');
             const modalContent = document.getElementById('local-video-modal-content');
             const videoContainer = document.getElementById('local-video-container');
             
             // Inject ulang tag video sepenuhnya setiap modal dibuka
-            // Ini menjamin browser me-load ulang file tanpa nyangkut di DOM sebelumnya
             videoContainer.innerHTML = `
                 <video id="local-video-player" class="absolute top-0 left-0 w-full h-full object-cover" controls playsinline autoplay>
                     <source src="${videoUrl}" type="video/mp4">
