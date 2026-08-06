@@ -363,24 +363,24 @@
             <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center lg:items-stretch">
                 
                 <!-- Testimoni Video -->
-                          <div class="w-full lg:w-5/12 shrink-0">
-                <div class="relative rounded-[2rem] overflow-hidden aspect-[4/5] bg-slate-800 shadow-card hover:shadow-2xl transition-all duration-300 group cursor-pointer w-full max-w-md mx-auto" 
-                     onclick="openLocalVideoModal('assets/testimoni.mp4')">
-                    
-                    <img src="assets/aa.png" alt="Thumbnail Testimoni" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                    
-                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                        <div class="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/40 group-hover:scale-110 transition-transform shadow-glow-gold">
-                            <i class="fas fa-play text-3xl text-white ml-2"></i>
+                <div class="w-full lg:w-5/12 shrink-0">
+                    <div class="relative rounded-[2rem] overflow-hidden aspect-[4/5] bg-slate-800 shadow-card hover:shadow-2xl transition-all duration-300 group cursor-pointer w-full max-w-md mx-auto" 
+                         onclick="openLocalVideoModal('assets/testimoni.mp4')">
+                        
+                        <img src="assets/aa.png" alt="Thumbnail Testimoni" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        
+                        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+                            <div class="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/40 group-hover:scale-110 transition-transform shadow-glow-gold">
+                                <i class="fas fa-play text-3xl text-white ml-2"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/90 via-black/50 to-transparent text-white">
+                            <p class="font-bold text-xl mb-1">Bpk. H. Abdullah</p>
+                            <p class="text-sm text-brand-goldLight font-medium">Pengusaha</p>
                         </div>
                     </div>
-                    
-                    <div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/90 via-black/50 to-transparent text-white">
-                        <p class="font-bold text-xl mb-1">Aiman Ricky</p>
-                        <p class="text-sm text-brand-goldLight font-medium">Artis</p>
-                    </div>
                 </div>
-            </div>
 
                 <!-- Testimoni Teks Berjalan (Auto scroll + Manual drag) -->
                 <div class="w-full lg:w-7/12 relative h-[550px] lg:h-[650px] rounded-[2rem] bg-slate-50 border border-slate-100 shadow-inner overflow-hidden">
@@ -389,7 +389,6 @@
                     <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-slate-50 to-transparent z-10 pointer-events-none rounded-b-[2rem]"></div>
                     
                     <!-- Container Scrollable -->
-                    <!-- Menambahkan id untuk JS dan classes untuk overflow manual tanpa scrollbar visual -->
                     <div id="testimonial-scroll-container" class="w-full h-full overflow-y-auto hide-scrollbar p-4 lg:p-6 cursor-grab active:cursor-grabbing">
                         <div class="flex flex-col gap-6" id="testimonial-inner">
                             
@@ -525,7 +524,6 @@
         <div class="relative w-full max-w-sm mx-4 rounded-3xl overflow-hidden shadow-2xl border border-white/10 transform scale-95 transition-transform duration-300" id="local-video-modal-content" onclick="event.stopPropagation();">
             <div class="relative bg-black w-full aspect-[4/5] md:aspect-[9/16]">
                 <video id="local-video-player" class="absolute top-0 left-0 w-full h-full object-cover" controls playsinline>
-                    <source src="" type="video/mp4">
                     Browser Anda tidak mendukung tag video.
                 </video>
             </div>
@@ -1060,9 +1058,17 @@
             const modalContent = document.getElementById('local-video-modal-content');
             const videoPlayer = document.getElementById('local-video-player');
             
-            // Set sumber video dan putar
+            // Set sumber video dan panggil fungsi load() WAJIB
             videoPlayer.src = videoUrl;
-            videoPlayer.play();
+            videoPlayer.load(); // Baris ini penting agar browser memuat ulang video
+            
+            // Tangani error autoplay dari browser
+            let playPromise = videoPlayer.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Video tidak bisa otomatis diputar, silakan klik play manual.", error);
+                });
+            }
 
             modal.classList.remove('hidden');
             modal.classList.add('flex');
