@@ -224,7 +224,7 @@
                 </div>
 
                 <button onclick="document.getElementById('paket').scrollIntoView({behavior: 'smooth'})" class="inline-flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors group cursor-pointer bg-transparent border-none">
-                    Likat Pilihan Kelas <i class="fas fa-arrow-down transform group-hover:translate-y-1 transition-transform"></i>
+                    Lihat Pilihan Kelas <i class="fas fa-arrow-down transform group-hover:translate-y-1 transition-transform"></i>
                 </button>
             </div>
         </div>
@@ -522,10 +522,8 @@
 
         <!-- Responsive Video Container (Vertikal) -->
         <div class="relative w-full max-w-sm mx-4 rounded-3xl overflow-hidden shadow-2xl border border-white/10 transform scale-95 transition-transform duration-300" id="local-video-modal-content" onclick="event.stopPropagation();">
-            <div class="relative bg-black w-full aspect-[4/5] md:aspect-[9/16]">
-                <video id="local-video-player" class="absolute top-0 left-0 w-full h-full object-cover" controls playsinline>
-                    Browser Anda tidak mendukung tag video.
-                </video>
+            <!-- Tempat Video di Inject oleh JS -->
+            <div id="local-video-container" class="relative bg-black w-full aspect-[4/5] md:aspect-[9/16]">
             </div>
         </div>
     </div>
@@ -592,7 +590,7 @@
                                 </h4>
                                 <div class="flex items-start gap-3">
                                     <span class="text-slate-400 mt-0.5 shrink-0 w-4 text-center"><i class="far fa-calendar"></i></span>
-                                    <span class="font-medium text-slate-700">Minggu/Ahad, 16 Agustus 2026</span>
+                                    <span class="font-medium text-slate-700">Minggu/Ahad, 30 Agustus 2026</span>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <span class="text-slate-400 mt-0.5 shrink-0 w-4 text-center"><i class="far fa-clock"></i></span>
@@ -1006,20 +1004,18 @@
             const iframeContainer = document.getElementById('iframe-container');
             const iframe = document.getElementById('video-iframe');
             
-            // Atur rasio berdasarkan jenis video (Horizontal vs Vertikal)
             if (isVertical) {
                 iframeContainer.classList.remove('aspect-video');
                 iframeContainer.classList.add('aspect-[9/16]');
                 modalContent.classList.remove('max-w-4xl');
-                modalContent.classList.add('max-w-sm'); // Lebar kecil untuk format HP
+                modalContent.classList.add('max-w-sm'); 
             } else {
                 iframeContainer.classList.add('aspect-video');
                 iframeContainer.classList.remove('aspect-[9/16]');
-                modalContent.classList.add('max-w-4xl'); // Lebar penuh untuk format Landscape
+                modalContent.classList.add('max-w-4xl'); 
                 modalContent.classList.remove('max-w-sm');
             }
 
-            // Masukkan link URL ke iframe
             iframe.src = videoUrl;
 
             modal.classList.remove('hidden');
@@ -1046,29 +1042,26 @@
             setTimeout(() => {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
-                iframe.src = ''; // Bersihkan src agar video berhenti berputar
+                iframe.src = ''; 
             }, 300);
         }
 
         // ==========================================
-        // FUNGSI MODAL LOCAL VIDEO (MP4)
+        // FUNGSI MODAL LOCAL VIDEO (MP4) - INJECT METHOD
         // ==========================================
         function openLocalVideoModal(videoUrl) {
             const modal = document.getElementById('local-video-modal');
             const modalContent = document.getElementById('local-video-modal-content');
-            const videoPlayer = document.getElementById('local-video-player');
+            const videoContainer = document.getElementById('local-video-container');
             
-            // Set sumber video dan panggil fungsi load() WAJIB
-            videoPlayer.src = videoUrl;
-            videoPlayer.load(); // Baris ini penting agar browser memuat ulang video
-            
-            // Tangani error autoplay dari browser
-            let playPromise = videoPlayer.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    console.log("Video tidak bisa otomatis diputar, silakan klik play manual.", error);
-                });
-            }
+            // Inject ulang tag video sepenuhnya setiap modal dibuka
+            // Ini menjamin browser me-load ulang file tanpa nyangkut di DOM sebelumnya
+            videoContainer.innerHTML = `
+                <video id="local-video-player" class="absolute top-0 left-0 w-full h-full object-cover" controls playsinline autoplay>
+                    <source src="${videoUrl}" type="video/mp4">
+                    Browser Anda tidak mendukung tag video.
+                </video>
+            `;
 
             modal.classList.remove('hidden');
             modal.classList.add('flex');
@@ -1084,7 +1077,7 @@
         function closeLocalVideoModal() {
             const modal = document.getElementById('local-video-modal');
             const modalContent = document.getElementById('local-video-modal-content');
-            const videoPlayer = document.getElementById('local-video-player');
+            const videoContainer = document.getElementById('local-video-container');
             
             modal.classList.remove('opacity-100');
             modal.classList.add('opacity-0');
@@ -1095,10 +1088,8 @@
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
                 
-                // Hentikan video dan reset sumber
-                videoPlayer.pause();
-                videoPlayer.currentTime = 0;
-                videoPlayer.src = ''; 
+                // Hancurkan elemen video untuk menghentikan putaran dan menghemat memori
+                videoContainer.innerHTML = ''; 
             }, 300);
         }
 
@@ -1149,7 +1140,6 @@
             if (isAutoScrolling && testContainer) {
                 testContainer.scrollTop += scrollSpeed;
                 
-                // Logika looping
                 if (testContainer.scrollTop >= (testContainer.scrollHeight / 2)) {
                     testContainer.scrollTop = 0;
                 }
