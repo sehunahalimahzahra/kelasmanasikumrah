@@ -518,7 +518,9 @@
                 <p class="text-slate-500 max-w-xl mx-auto">Tersedia kelas tatap muka eksklusif dan kelas daring. Pilih paket yang paling sesuai dengan kebutuhan Anda.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <!-- Diubah menjadi max-w-md agar card yang tersisa (Offline) posisinya di tengah -->
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-md mx-auto">
+                
                 <!-- KELAS ONLINE CARD -->
                 <div class="hidden bg-white rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden">
                     <div class="relative w-full aspect-[4/5] bg-slate-100 overflow-hidden cursor-pointer" onclick="openImageModal(this.querySelector('img').src)">
@@ -708,11 +710,11 @@
                         </div>
                         <div>
                             <label for="reg_package" class="block text-sm font-semibold text-slate-700 mb-2">Pilihan Kelas <span class="text-red-500">*</span></label>
+                            <!-- Opsi Online dihapus di sini -->
                             <select id="reg_package" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 outline-none transition-all bg-white shadow-sm font-medium">
                                 <option value="" disabled selected>-- Pilih Kelas Anda --</option>
                                 <option value="Offline Early Bird (Rp 225.000)">Offline Early Bird - Rp 225.000</option>
                                 <option value="Offline Normal (Rp 275.000)">Offline Normal - Rp 275.000</option>
-                                <option value="Online (Rp 50.000)">Online - Rp 50.000</option>
                             </select>
                         </div>
                     </div>
